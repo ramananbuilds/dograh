@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge';
 export function StatusBadge({ status }: { status: string }) {
   switch (status?.toLowerCase()) {
     case 'active':
+      return <Badge variant='default' className='bg-green-600 hover:bg-green-700 capitalize'>Active</Badge>;
     case 'completed':
     case 'running':
       return <Badge variant='default' className='bg-green-600 hover:bg-green-700'>{status}</Badge>;

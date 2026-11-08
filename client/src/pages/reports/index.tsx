@@ -29,6 +29,13 @@ import { useAgents } from '@/hooks/use-agents';
 import { formatDuration } from '@/lib/format';
 
 const DISP_COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ef4444'];
+const DISP_SHADOWS = [
+  'hover:[filter:drop-shadow(0_12px_20px_rgba(59,130,246,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
+  'hover:[filter:drop-shadow(0_12px_20px_rgba(16,185,129,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
+  'hover:[filter:drop-shadow(0_12px_20px_rgba(245,158,11,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
+  'hover:[filter:drop-shadow(0_12px_20px_rgba(139,92,246,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
+  'hover:[filter:drop-shadow(0_12px_20px_rgba(239,68,68,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
+];
 
 export default function ReportsPage() {
   const [selectedWorkflow, setSelectedWorkflow] = useState('all');
@@ -196,6 +203,7 @@ export default function ReportsPage() {
                   />
                   <YAxis tick={{ fontSize: 11 }} />
                   <Tooltip
+                    cursor={false}
                     content={({ active, payload }) => {
                       if (active && payload && payload.length) {
                         const d = payload[0].payload;
@@ -213,7 +221,11 @@ export default function ReportsPage() {
                   />
                   <Bar dataKey="count" radius={[4, 4, 0, 0]}>
                     {dispositions.map((_, index) => (
-                      <Cell key={`disp-${index}`} fill={DISP_COLORS[index % DISP_COLORS.length]} />
+                      <Cell
+                        key={`disp-${index}`}
+                        fill={DISP_COLORS[index % DISP_COLORS.length]}
+                        className={`cursor-pointer transition-all duration-300 ease-out origin-bottom hover:scale-y-105 hover:scale-x-[1.02] ${DISP_SHADOWS[index % DISP_SHADOWS.length]} hover:brightness-110`}
+                      />
                     ))}
                   </Bar>
                 </BarChart>
@@ -236,6 +248,7 @@ export default function ReportsPage() {
                   <XAxis dataKey="bucket" tick={{ fontSize: 11 }} height={60} />
                   <YAxis tick={{ fontSize: 11 }} />
                   <Tooltip
+                    cursor={false}
                     content={({ active, payload }) => {
                       if (active && payload && payload.length) {
                         const d = payload[0].payload;
@@ -251,7 +264,14 @@ export default function ReportsPage() {
                       return null;
                     }}
                   />
-                  <Bar dataKey="count" fill="#10b981" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="count" fill="#10b981" radius={[4, 4, 0, 0]}>
+                    {durations.map((_, index) => (
+                      <Cell
+                        key={`dur-${index}`}
+                        className="cursor-pointer transition-all duration-300 ease-out origin-bottom hover:scale-y-105 hover:scale-x-[1.02] hover:[filter:drop-shadow(0_12px_20px_rgba(16,185,129,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))] hover:brightness-110"
+                      />
+                    ))}
+                  </Bar>
                 </BarChart>
               </ResponsiveContainer>
             </div>

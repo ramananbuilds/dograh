@@ -119,10 +119,10 @@ export default function RecordingsPage() {
             <button
               key={tab}
               onClick={() => setSentimentFilter(tab)}
-              className={`px-3 py-1 rounded-lg text-xs capitalize transition-all ${
+              className={`px-3 py-1 rounded-lg text-xs capitalize transition-all duration-300 ease-out font-medium ${
                 sentimentFilter === tab
-                  ? 'bg-zinc-800 text-white font-medium shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200'
+                  ? 'bg-zinc-800 text-white shadow-[0_2px_10px_rgba(0,0,0,0.5),0_0_12px_rgba(99,102,241,0.25)] border border-zinc-700/60 scale-[1.02]'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'
               }`}
             >
               {tab}

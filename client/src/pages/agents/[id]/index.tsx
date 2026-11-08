@@ -24,28 +24,28 @@ export default function AgentDetailPage() {
       <div className="flex items-center gap-1.5 border-b border-zinc-800/80 pb-3 text-xs overflow-x-auto">
         <Link
           to={`/agents/${id}`}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.08] text-white font-medium border border-white/[0.1] shadow-sm"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.08] text-white font-medium border border-white/[0.1] shadow-sm transition-all duration-300 ease-out scale-[1.02]"
         >
           <Bot className="h-3.5 w-3.5 text-indigo-400" />
           <span>Prompt & Persona</span>
         </Link>
         <Link
           to={`/agents/${id}/runs`}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/[0.04] transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/[0.04] transition-all duration-300 ease-out"
         >
           <Clock className="h-3.5 w-3.5" />
           <span>Call History</span>
         </Link>
         <Link
           to={`/agents/${id}/embed`}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/[0.04] transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/[0.04] transition-all duration-300 ease-out"
         >
           <Code2 className="h-3.5 w-3.5" />
           <span>Embed Widget</span>
         </Link>
         <Link
           to={`/agents/${id}/settings`}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/[0.04] transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/[0.04] transition-all duration-300 ease-out"
         >
           <Settings2 className="h-3.5 w-3.5" />
           <span>Settings</span>

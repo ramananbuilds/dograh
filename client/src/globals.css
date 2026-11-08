@@ -56,14 +56,19 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.rounded-2xl.border,
+.rounded-xl.border,
 .glow-card {
-  position: relative;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s ease-out !important;
 }
 
+.rounded-2xl.border:hover,
+.rounded-xl.border:hover,
 .glow-card:hover {
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+  transform: translateY(-6px) scale(1.015);
+  filter: drop-shadow(0 16px 28px rgba(99, 102, 241, 0.45)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9));
+  border-color: rgba(99, 102, 241, 0.5) !important;
+  filter: brightness(1.1) drop-shadow(0 16px 28px rgba(99, 102, 241, 0.45)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9));
 }
 
 /* Audio Waveform Bars Animation */

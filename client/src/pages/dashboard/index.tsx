@@ -38,7 +38,19 @@ import { useAgentRuns } from '@/hooks/use-agent-runs';
 import { formatDuration, formatRelativeTime, formatCurrency } from '@/lib/format';
 
 const DISPOSITION_COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6'];
+const DISPOSITION_SHADOWS = [
+  'hover:[filter:drop-shadow(0_12px_22px_rgba(99,102,241,0.55))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
+  'hover:[filter:drop-shadow(0_12px_22px_rgba(16,185,129,0.55))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
+  'hover:[filter:drop-shadow(0_12px_22px_rgba(245,158,11,0.55))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
+  'hover:[filter:drop-shadow(0_12px_22px_rgba(236,72,153,0.55))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
+  'hover:[filter:drop-shadow(0_12px_22px_rgba(139,92,246,0.55))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
+];
 const LATENCY_COLORS = ['#06b6d4', '#6366f1', '#a855f7'];
+const LATENCY_SHADOWS = [
+  'hover:[filter:drop-shadow(0_12px_20px_rgba(6,182,212,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
+  'hover:[filter:drop-shadow(0_12px_20px_rgba(99,102,241,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
+  'hover:[filter:drop-shadow(0_12px_20px_rgba(168,85,247,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
+];
 
 export default function DashboardPage() {
   const [timeRange, setTimeRange] = useState<'today' | '7d' | '30d'>('today');
@@ -87,31 +99,28 @@ export default function DashboardPage() {
           <div className="flex bg-zinc-900 rounded-xl p-1 border border-zinc-800">
             <button
               onClick={() => setTimeRange('today')}
-              className={`px-3 py-1 text-xs font-medium rounded-lg transition-all ${
-                timeRange === 'today'
-                  ? 'bg-zinc-800 text-white shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200'
-              }`}
+              className={`px-3 py-1 text-xs font-medium rounded-lg transition-all duration-300 ease-out ${timeRange === 'today'
+                ? 'bg-zinc-800 text-white shadow-[0_2px_10px_rgba(0,0,0,0.5),0_0_12px_rgba(99,102,241,0.25)] border border-zinc-700/60 scale-[1.02]'
+                : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'
+                }`}
             >
               Today
             </button>
             <button
               onClick={() => setTimeRange('7d')}
-              className={`px-3 py-1 text-xs font-medium rounded-lg transition-all ${
-                timeRange === '7d'
-                  ? 'bg-zinc-800 text-white shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200'
-              }`}
+              className={`px-3 py-1 text-xs font-medium rounded-lg transition-all duration-300 ease-out ${timeRange === '7d'
+                ? 'bg-zinc-800 text-white shadow-[0_2px_10px_rgba(0,0,0,0.5),0_0_12px_rgba(99,102,241,0.25)] border border-zinc-700/60 scale-[1.02]'
+                : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'
+                }`}
             >
               7 Days
             </button>
             <button
               onClick={() => setTimeRange('30d')}
-              className={`px-3 py-1 text-xs font-medium rounded-lg transition-all ${
-                timeRange === '30d'
-                  ? 'bg-zinc-800 text-white shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200'
-              }`}
+              className={`px-3 py-1 text-xs font-medium rounded-lg transition-all duration-300 ease-out ${timeRange === '30d'
+                ? 'bg-zinc-800 text-white shadow-[0_2px_10px_rgba(0,0,0,0.5),0_0_12px_rgba(99,102,241,0.25)] border border-zinc-700/60 scale-[1.02]'
+                : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'
+                }`}
             >
               30 Days
             </button>
@@ -358,6 +367,7 @@ export default function DashboardPage() {
                         fill={DISPOSITION_COLORS[index % DISPOSITION_COLORS.length]}
                         stroke="#111215"
                         strokeWidth={2}
+                        className={`cursor-pointer transition-all duration-300 ease-out origin-center hover:scale-105 ${DISPOSITION_SHADOWS[index % DISPOSITION_SHADOWS.length]} hover:brightness-110`}
                       />
                     ))}
                   </Pie>
@@ -420,6 +430,7 @@ export default function DashboardPage() {
                   <XAxis dataKey="bucket" tick={{ fontSize: 11, fill: '#71717a' }} stroke="#27272a" />
                   <YAxis tick={{ fontSize: 11, fill: '#71717a' }} stroke="#27272a" />
                   <Tooltip
+                    cursor={false}
                     content={({ active, payload }) => {
                       if (active && payload && payload.length) {
                         const d = payload[0].payload;
@@ -435,7 +446,18 @@ export default function DashboardPage() {
                       return null;
                     }}
                   />
-                  <Bar dataKey="count" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                  <Bar
+                    dataKey="count"
+                    fill="#6366f1"
+                    radius={[4, 4, 0, 0]}
+                  >
+                    {durationData.map((_, index) => (
+                      <Cell
+                        key={`dur-${index}`}
+                        className="cursor-pointer transition-all duration-300 ease-out origin-bottom hover:scale-y-105 hover:scale-x-[1.02] hover:[filter:drop-shadow(0_12px_20px_rgba(99,102,241,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))] hover:brightness-110"
+                      />
+                    ))}
+                  </Bar>
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -460,14 +482,22 @@ export default function DashboardPage() {
                   <XAxis type="number" unit="ms" tick={{ fontSize: 11, fill: '#71717a' }} stroke="#27272a" />
                   <YAxis type="category" dataKey="stage" tick={{ fontSize: 11, fill: '#71717a' }} width={130} stroke="#27272a" />
                   <Tooltip
+                    cursor={false}
                     formatter={(val) => [`${val} ms`, 'Response Time']}
-                    contentStyle={{ fontSize: 12, borderRadius: 12, backgroundColor: '#16181d', borderColor: '#27272a', color: '#fff' }}
+                    contentStyle={{ fontSize: 12, borderRadius: 12, backgroundColor: '#16181d', borderColor: '#27272a', color: '#ffffff' }}
+                    labelStyle={{ color: '#ffffff' }}
+                    itemStyle={{ color: '#ffffff' }}
+                    wrapperStyle={{ color: '#ffffff' }}
                   />
-                  <Bar dataKey="latency_ms" radius={[0, 4, 4, 0]}>
+                  <Bar
+                    dataKey="latency_ms"
+                    radius={[0, 6, 6, 0]}
+                  >
                     {latencyData.map((_, index) => (
                       <Cell
                         key={`lat-${index}`}
                         fill={LATENCY_COLORS[index % LATENCY_COLORS.length]}
+                        className={`cursor-pointer transition-all duration-300 ease-out origin-left hover:scale-x-105 hover:scale-y-[1.03] ${LATENCY_SHADOWS[index % LATENCY_SHADOWS.length]} hover:brightness-110`}
                       />
                     ))}
                   </Bar>
@@ -581,11 +611,10 @@ export default function DashboardPage() {
                   <TableCell>
                     <Badge
                       variant="secondary"
-                      className={`text-[10px] font-semibold uppercase rounded-md ${
-                        run.call_type === 'inbound'
-                          ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
-                          : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                      }`}
+                      className={`text-[10px] font-semibold uppercase rounded-md ${run.call_type === 'inbound'
+                        ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                        : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                        }`}
                     >
                       {run.call_type || 'inbound'}
                     </Badge>

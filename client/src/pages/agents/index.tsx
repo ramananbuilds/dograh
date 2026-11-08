@@ -56,27 +56,33 @@ export default function AgentsPage() {
           />
         </div>
 
-        <div className="flex bg-zinc-900 rounded-xl p-1 border border-zinc-800 text-xs self-start sm:self-auto">
+        <div className="flex bg-zinc-900 rounded-xl p-1 border border-zinc-800 text-xs self-start sm:self-auto relative">
           <button
             onClick={() => setFilter('all')}
-            className={`px-3 py-1 rounded-lg font-medium transition-colors ${
-              filter === 'all' ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:text-zinc-200'
+            className={`px-3 py-1 rounded-lg font-medium transition-all duration-300 ease-out ${
+              filter === 'all'
+                ? 'bg-zinc-800 text-white shadow-[0_2px_10px_rgba(0,0,0,0.5),0_0_12px_rgba(99,102,241,0.25)] border border-zinc-700/60 scale-[1.02]'
+                : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'
             }`}
           >
             All Agents
           </button>
           <button
             onClick={() => setFilter('active')}
-            className={`px-3 py-1 rounded-lg font-medium transition-colors ${
-              filter === 'active' ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:text-zinc-200'
+            className={`px-3 py-1 rounded-lg font-medium transition-all duration-300 ease-out ${
+              filter === 'active'
+                ? 'bg-zinc-800 text-white shadow-[0_2px_10px_rgba(0,0,0,0.5),0_0_12px_rgba(99,102,241,0.25)] border border-zinc-700/60 scale-[1.02]'
+                : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'
             }`}
           >
             Active
           </button>
           <button
             onClick={() => setFilter('draft')}
-            className={`px-3 py-1 rounded-lg font-medium transition-colors ${
-              filter === 'draft' ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:text-zinc-200'
+            className={`px-3 py-1 rounded-lg font-medium transition-all duration-300 ease-out ${
+              filter === 'draft'
+                ? 'bg-zinc-800 text-white shadow-[0_2px_10px_rgba(0,0,0,0.5),0_0_12px_rgba(99,102,241,0.25)] border border-zinc-700/60 scale-[1.02]'
+                : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40'
             }`}
           >
             Drafts
