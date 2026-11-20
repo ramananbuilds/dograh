@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Radio, Bell, Bot, Megaphone, Cpu, Wrench, FileText, Phone, ArrowRight, X, CheckCircle2, AlertCircle, Info } from 'lucide-react';
+import { Search, Radio, Bell, Bot, Megaphone, Cpu, Wrench, FileText, Phone, ArrowRight, X, CheckCircle2, AlertCircle, Info, Menu } from 'lucide-react';
 import { UserMenu } from './user-menu';
 import { Badge } from '@/components/ui/badge';
 
@@ -28,7 +28,7 @@ const SEARCH_ITEMS: SearchItem[] = [
   { title: 'Developer API Keys', category: 'Settings', href: '/api-keys', icon: Wrench, description: 'Service keys, SDK authentication' },
 ];
 
-export function Topbar() {
+export function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [showNotifications, setShowNotifications] = useState(false);
@@ -44,12 +44,12 @@ export function Topbar() {
     },
     {
       id: 'notif_2',
-      title: 'ElevenLabs Voice Engine',
+      title: 'Dograh Voice Engine',
       message: 'Voice quota healthy. Pre-recorded audio synthesis ready.',
       time: '24m ago',
       unread: true,
       icon: Info,
-      iconColor: 'text-indigo-400',
+      iconColor: 'text-brand',
     },
     {
       id: 'notif_3',
@@ -121,10 +121,21 @@ export function Topbar() {
   return (
     <header className="flex h-16 items-center justify-between border-b border-zinc-800/80 bg-[#0e0f12]/80 backdrop-blur-md px-6 sticky top-0 z-20 shrink-0">
       <div className="flex items-center gap-4">
+        {onMenuClick && (
+          <button
+            type="button"
+            onClick={onMenuClick}
+            title="Open navigation"
+            aria-label="Open navigation"
+            className="md:hidden p-2 -ml-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/[0.06] transition-colors"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+        )}
         {/* Normal Inline Search Input with Google-style suggestions dropdown */}
         <div ref={searchContainerRef} className="relative w-80">
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-zinc-300 focus-within:border-zinc-700 focus-within:ring-1 focus-within:ring-zinc-700 transition-colors">
-            <Search className="h-3.5 w-3.5 text-zinc-500 shrink-0" />
+            <Search className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
             <input
               ref={inputRef}
               type="text"
@@ -137,7 +148,7 @@ export function Topbar() {
                 if (query.trim()) setIsOpen(true);
               }}
               placeholder="Search agents, calls, models..."
-              className="w-full bg-transparent text-xs text-zinc-200 placeholder:text-zinc-500 focus:outline-none"
+              className="w-full bg-transparent text-xs text-zinc-200 placeholder:text-zinc-400 focus:outline-none"
             />
             {query ? (
               <button
@@ -146,12 +157,12 @@ export function Topbar() {
                   setQuery('');
                   setIsOpen(false);
                 }}
-                className="text-zinc-500 hover:text-zinc-300 p-0.5"
+                className="text-zinc-400 hover:text-zinc-300 p-0.5"
               >
                 <X className="h-3 w-3" />
               </button>
             ) : (
-              <kbd className="ml-auto font-mono text-[10px] bg-zinc-800 px-1.5 py-0.5 rounded text-zinc-400 border border-zinc-700/60 shrink-0">
+              <kbd className="ml-auto font-mono text-xs bg-zinc-800 px-1.5 py-0.5 rounded text-zinc-400 border border-zinc-700/60 shrink-0">
                 ⌘K
               </kbd>
             )}
@@ -161,7 +172,7 @@ export function Topbar() {
           {isOpen && query.trim() && (
             <div className="absolute top-full left-0 right-0 mt-2 bg-[#111215] border border-zinc-800 rounded-xl shadow-2xl overflow-hidden z-50 max-h-80 overflow-y-auto p-1.5 space-y-1">
               {filtered.length === 0 ? (
-                <div className="p-4 text-center text-xs text-zinc-500">
+                <div className="p-4 text-center text-xs text-zinc-400">
                   No results found for &ldquo;<span className="text-zinc-300">{query}</span>&rdquo;
                 </div>
               ) : (
@@ -178,18 +189,18 @@ export function Topbar() {
                       className="w-full flex items-center justify-between p-2 rounded-lg hover:bg-zinc-800/60 transition-colors text-left group"
                     >
                       <div className="flex items-center gap-2.5 min-w-0">
-                        <div className="h-7 w-7 rounded-md bg-zinc-800 border border-zinc-700/50 flex items-center justify-center text-zinc-400 group-hover:text-indigo-400 shrink-0">
+                        <div className="h-7 w-7 rounded-md bg-zinc-800 border border-zinc-700/50 flex items-center justify-center text-zinc-400 group-hover:text-brand shrink-0">
                           <Icon className="h-3.5 w-3.5" />
                         </div>
                         <div className="min-w-0">
                           <div className="text-xs font-medium text-zinc-200 group-hover:text-white flex items-center gap-1.5">
                             <span className="truncate">{item.title}</span>
-                            <span className="text-[9px] font-mono text-zinc-500 bg-zinc-900 border border-zinc-800 px-1 py-0.2 rounded shrink-0">
+                            <span className="text-[9px] font-mono text-zinc-400 bg-zinc-900 border border-zinc-800 px-1 py-0.2 rounded shrink-0">
                               {item.category}
                             </span>
                           </div>
                           {item.description && (
-                            <div className="text-[10px] text-zinc-500 truncate mt-0.5">
+                            <div className="text-xs text-zinc-400 truncate mt-0.5">
                               {item.description}
                             </div>
                           )}
@@ -220,12 +231,13 @@ export function Topbar() {
           <button
             type="button"
             title="Notifications"
+            aria-label="Notifications"
             onClick={() => setShowNotifications((prev) => !prev)}
             className="p-2 rounded-lg hover:bg-white/[0.06] text-zinc-400 hover:text-white transition-colors relative cursor-pointer"
           >
             <Bell className="h-4 w-4" />
             {unreadCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-indigo-500 ring-2 ring-[#0e0f12]" />
+              <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-brand ring-2 ring-[#0e0f12]" />
             )}
           </button>
 
@@ -235,7 +247,7 @@ export function Topbar() {
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-semibold text-white">Notifications</span>
                   {unreadCount > 0 && (
-                    <span className="text-[10px] bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 px-1.5 py-0.2 rounded-full font-mono">
+                    <span className="text-xs bg-brand/20 text-brand border border-brand/30 px-1.5 py-0.2 rounded-full font-mono">
                       {unreadCount} new
                     </span>
                   )}
@@ -244,7 +256,7 @@ export function Topbar() {
                   <button
                     type="button"
                     onClick={markAllRead}
-                    className="text-[10px] text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
+                    className="text-xs text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
                   >
                     Mark all read
                   </button>
@@ -267,9 +279,9 @@ export function Topbar() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-1">
                           <p className="text-xs font-medium text-zinc-200 truncate">{n.title}</p>
-                          <span className="text-[10px] text-zinc-500 shrink-0 font-mono">{n.time}</span>
+                          <span className="text-xs text-zinc-400 shrink-0 font-mono">{n.time}</span>
                         </div>
-                        <p className="text-[11px] text-zinc-400 leading-relaxed mt-0.5">{n.message}</p>
+                        <p className="text-xs text-zinc-400 leading-relaxed mt-0.5">{n.message}</p>
                       </div>
                     </div>
                   );

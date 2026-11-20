@@ -17,7 +17,7 @@ interface VariantStat {
 const SAMPLE_VARIANTS: VariantStat[] = [
   {
     agentName: 'Customer Support Specialist',
-    voiceEngine: 'ElevenLabs Turbo v2.5 (Rachel)',
+    voiceEngine: 'Dograh Turbo v2.5 (Rachel)',
     version: 'v2.1',
     targetSplit: '70%',
     actualSplit: '69.4%',
@@ -55,39 +55,39 @@ export function CampaignStats({ campaignId: _campaignId }: { campaignId: string 
       {/* Disposition Tiles */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
         <div className="p-3 bg-zinc-900/60 rounded-xl border border-zinc-800/70">
-          <div className="flex items-center justify-center gap-1 text-[11px] text-zinc-400 mb-1">
+          <div className="flex items-center justify-center gap-1 text-xs text-zinc-400 mb-1">
             <PhoneCall className="h-3 w-3 text-emerald-400" />
             <span>Answered</span>
           </div>
           <div className="text-xl font-bold text-emerald-400">728</div>
-          <div className="text-[10px] text-zinc-500 font-mono mt-0.5">86.5% rate</div>
+          <div className="text-xs text-zinc-400 font-mono mt-0.5">86.5% rate</div>
         </div>
 
         <div className="p-3 bg-zinc-900/60 rounded-xl border border-zinc-800/70">
-          <div className="flex items-center justify-center gap-1 text-[11px] text-zinc-400 mb-1">
+          <div className="flex items-center justify-center gap-1 text-xs text-zinc-400 mb-1">
             <PhoneForwarded className="h-3 w-3 text-blue-400" />
             <span>Transferred</span>
           </div>
           <div className="text-xl font-bold text-blue-400">64</div>
-          <div className="text-[10px] text-zinc-500 font-mono mt-0.5">7.6% rate</div>
+          <div className="text-xs text-zinc-400 font-mono mt-0.5">7.6% rate</div>
         </div>
 
         <div className="p-3 bg-zinc-900/60 rounded-xl border border-zinc-800/70">
-          <div className="flex items-center justify-center gap-1 text-[11px] text-zinc-400 mb-1">
+          <div className="flex items-center justify-center gap-1 text-xs text-zinc-400 mb-1">
             <Voicemail className="h-3 w-3 text-amber-400" />
             <span>Voicemail</span>
           </div>
           <div className="text-xl font-bold text-amber-400">32</div>
-          <div className="text-[10px] text-zinc-500 font-mono mt-0.5">3.8% rate</div>
+          <div className="text-xs text-zinc-400 font-mono mt-0.5">3.8% rate</div>
         </div>
 
         <div className="p-3 bg-zinc-900/60 rounded-xl border border-zinc-800/70">
-          <div className="flex items-center justify-center gap-1 text-[11px] text-zinc-400 mb-1">
+          <div className="flex items-center justify-center gap-1 text-xs text-zinc-400 mb-1">
             <PhoneMissed className="h-3 w-3 text-rose-400" />
             <span>Busy / Failed</span>
           </div>
           <div className="text-xl font-bold text-rose-400">18</div>
-          <div className="text-[10px] text-zinc-500 font-mono mt-0.5">2.1% rate</div>
+          <div className="text-xs text-zinc-400 font-mono mt-0.5">2.1% rate</div>
         </div>
       </div>
 
@@ -114,7 +114,7 @@ export function CampaignStats({ campaignId: _campaignId }: { campaignId: string 
                 <TableRow key={v.agentName} className="border-b border-zinc-800/40 hover:bg-zinc-800/30">
                   <TableCell className="py-2.5">
                     <div className="font-medium text-xs text-white">{v.agentName}</div>
-                    <div className="text-[11px] text-zinc-500 font-mono">{v.voiceEngine} · {v.version}</div>
+                    <div className="text-xs text-zinc-400 font-mono">{v.voiceEngine} · {v.version}</div>
                   </TableCell>
                   <TableCell className="text-xs font-mono text-zinc-400 py-2.5">{v.targetSplit}</TableCell>
                   <TableCell className="text-xs font-mono font-semibold text-emerald-400 py-2.5">{v.actualSplit}</TableCell>

@@ -66,7 +66,7 @@ export function SidebarNav() {
       {navGroups.map((group, gIdx) => (
         <div key={gIdx} className="space-y-1">
           {group.section && !isCollapsed && (
-            <div className="px-3 pb-1 text-[10px] font-semibold tracking-wider uppercase text-zinc-500">
+            <div className="px-3 pb-1 text-xs font-semibold tracking-wider uppercase text-zinc-400">
               {group.section}
             </div>
           )}
@@ -91,7 +91,7 @@ export function SidebarNav() {
                     {!isCollapsed && <span className="truncate">{item.label}</span>}
                   </div>
                   {!isCollapsed && item.badge && (
-                    <span className="text-[10px] font-medium px-1.5 py-0.2 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span className="text-xs font-medium px-1.5 py-0.2 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                       {item.badge}
                     </span>
                   )}

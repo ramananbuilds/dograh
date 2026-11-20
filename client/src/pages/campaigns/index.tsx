@@ -68,7 +68,7 @@ export default function CampaignsPage() {
           </div>
           <div className="text-xl font-bold text-white flex items-center gap-2">
             {activeCount}
-            <span className="text-[11px] font-normal text-emerald-400 bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-800/40">
+            <span className="text-xs font-normal text-emerald-400 bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-800/40">
               Live
             </span>
           </div>
@@ -89,7 +89,7 @@ export default function CampaignsPage() {
           </div>
           <div className="text-xl font-bold text-white">
             {formatNumber(totalCompleted)}
-            <span className="text-xs text-zinc-500 font-normal ml-1.5">
+            <span className="text-xs text-zinc-400 font-normal ml-1.5">
               ({totalLeads ? Math.round((totalCompleted / totalLeads) * 100) : 0}%)
             </span>
           </div>
@@ -107,7 +107,7 @@ export default function CampaignsPage() {
       {/* Filter and Search Bar */}
       <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="relative w-full sm:w-72">
-          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-500" />
+          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-400" />
           <Input
             placeholder="Search campaigns..."
             className="pl-8 bg-[#111215] border-zinc-800/80 text-xs text-zinc-200 placeholder:text-zinc-600 rounded-xl h-8 focus-visible:ring-zinc-700"
@@ -138,7 +138,7 @@ export default function CampaignsPage() {
           <Megaphone className="h-8 w-8 text-zinc-600 mx-auto mb-3" />
           <h3 className="text-sm font-semibold text-white">No campaigns found</h3>
           <p className="text-xs text-zinc-400 mt-1 max-w-sm mx-auto">
-            Upload a CSV contact list and assign an ElevenLabs conversational agent to get started.
+            Upload a CSV contact list and assign a Dograh conversational agent to get started.
           </p>
           <Link to="/campaigns/new">
             <Button className="mt-4 bg-white text-zinc-950 hover:bg-zinc-200 text-xs font-semibold rounded-xl px-4 py-2">
@@ -188,7 +188,7 @@ export default function CampaignsPage() {
 
                     <Badge
                       variant="outline"
-                      className={`text-[11px] capitalize font-medium ${
+                      className={`text-xs capitalize font-medium ${
                         camp.status === 'running'
                           ? 'border-emerald-800/60 text-emerald-400 bg-emerald-950/30'
                           : camp.status === 'paused'
@@ -215,15 +215,15 @@ export default function CampaignsPage() {
                   {/* Metrics Badges */}
                   <div className="mt-4 grid grid-cols-3 gap-2 border-t border-zinc-800/60 pt-3">
                     <div>
-                      <div className="text-[10px] text-zinc-500 uppercase tracking-wider">Spend (INR)</div>
+                      <div className="text-xs text-zinc-400 uppercase tracking-wider">Spend (INR)</div>
                       <div className="text-xs font-semibold text-zinc-200 mt-0.5">{formatCurrency(spend)}</div>
                     </div>
                     <div>
-                      <div className="text-[10px] text-zinc-500 uppercase tracking-wider">Pacing Limit</div>
+                      <div className="text-xs text-zinc-400 uppercase tracking-wider">Pacing Limit</div>
                       <div className="text-xs font-semibold text-zinc-200 mt-0.5">8 calls/sec</div>
                     </div>
                     <div>
-                      <div className="text-[10px] text-zinc-500 uppercase tracking-wider">Est. Completion</div>
+                      <div className="text-xs text-zinc-400 uppercase tracking-wider">Est. Completion</div>
                       <div className="text-xs font-semibold text-zinc-200 mt-0.5">
                         {camp.status === 'completed' ? 'Done' : '~42 mins'}
                       </div>

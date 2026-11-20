@@ -19,7 +19,7 @@ export function AgentHeader({ agent }: { agent: WorkflowDefinition }) {
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="h-11 w-11 rounded-2xl bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0">
+          <div className="h-11 w-11 rounded-2xl bg-brand/15 border border-brand/30 flex items-center justify-center text-brand shrink-0">
             <Mic className="h-5 w-5" />
           </div>
           <div>
@@ -28,7 +28,7 @@ export function AgentHeader({ agent }: { agent: WorkflowDefinition }) {
               <StatusBadge status={agent.status} />
             </div>
             <p className="text-xs text-zinc-400 mt-0.5">
-              {agent.description || 'Configured with ElevenLabs natural dialogue pipeline.'}
+              {agent.description || 'Configured with the Dograh natural dialogue pipeline.'}
             </p>
           </div>
         </div>

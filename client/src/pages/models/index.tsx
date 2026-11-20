@@ -102,7 +102,7 @@ export default function ModelsPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-sm text-white">{m.name}</h3>
-                    <div className="text-[11px] text-zinc-400 font-mono mt-0.5">
+                    <div className="text-xs text-zinc-400 font-mono mt-0.5">
                       {m.provider} · <code className="text-zinc-300">{m.model_id}</code>
                     </div>
                   </div>
@@ -111,7 +111,7 @@ export default function ModelsPage() {
                 {m.is_default && (
                   <Badge
                     variant="outline"
-                    className="border-emerald-800/60 text-emerald-400 bg-emerald-950/30 text-[10px] font-medium"
+                    className="border-emerald-800/60 text-emerald-400 bg-emerald-950/30 text-xs font-medium"
                   >
                     Default
                   </Badge>
@@ -138,13 +138,13 @@ export default function ModelsPage() {
 
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div className="bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-2.5">
-                    <div className="text-[10px] text-zinc-500">Latency TTFT</div>
+                    <div className="text-xs text-zinc-400">Latency TTFT</div>
                     <div className="text-xs font-mono text-cyan-400 font-semibold mt-0.5">
                       {m.latencyBenchmark}
                     </div>
                   </div>
                   <div className="bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-2.5">
-                    <div className="text-[10px] text-zinc-500">Context Window</div>
+                    <div className="text-xs text-zinc-400">Context Window</div>
                     <div className="text-xs font-mono text-zinc-300 font-semibold mt-0.5">
                       {m.contextWindow}
                     </div>
@@ -152,8 +152,8 @@ export default function ModelsPage() {
                 </div>
 
                 <div className="bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-2.5 flex items-center justify-between text-xs">
-                  <span className="text-zinc-400 text-[11px]">Token Rate (INR)</span>
-                  <span className="font-mono text-zinc-200 font-medium text-[11px]">
+                  <span className="text-zinc-400 text-xs">Token Rate (INR)</span>
+                  <span className="font-mono text-zinc-200 font-medium text-xs">
                     {formatCurrency(m.inputCostInr)} / {formatCurrency(m.outputCostInr)} per 1M
                   </span>
                 </div>
@@ -162,7 +162,7 @@ export default function ModelsPage() {
 
             {/* Bottom Actions */}
             <div className="mt-5 flex items-center justify-between border-t border-zinc-800/60 pt-3">
-              <span className="text-[11px] text-zinc-500 font-mono">UUID: {m.uuid.substring(0, 12)}</span>
+              <span className="text-xs text-zinc-400 font-mono">UUID: {m.uuid.substring(0, 12)}</span>
               <Button
                 size="sm"
                 variant="outline"

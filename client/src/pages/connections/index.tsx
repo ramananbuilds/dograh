@@ -26,7 +26,7 @@ const CONNECTIONS_DATA: ExtendedConnection[] = [
   {
     uuid: 'conn_elevenlabs_01',
     provider_name: 'ElevenLabs',
-    display_name: 'ElevenLabs Turbo Voice Suite',
+    display_name: 'Dograh Turbo Voice Suite',
     latency: '125ms TTFB',
     modelsCount: 42,
     is_active: true,
@@ -128,7 +128,7 @@ export default function ConnectionsPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-sm text-white">{conn.display_name}</h3>
-                      <div className="text-[11px] text-zinc-400 font-mono mt-0.5">
+                      <div className="text-xs text-zinc-400 font-mono mt-0.5">
                         Provider: {conn.provider_name}
                       </div>
                     </div>
@@ -136,7 +136,7 @@ export default function ConnectionsPage() {
 
                   <Badge
                     variant="outline"
-                    className="border-emerald-800/60 text-emerald-400 bg-emerald-950/30 text-[10px] capitalize flex items-center gap-1 font-medium"
+                    className="border-emerald-800/60 text-emerald-400 bg-emerald-950/30 text-xs capitalize flex items-center gap-1 font-medium"
                   >
                     <CheckCircle2 className="h-3 w-3" />
                     Active
@@ -146,7 +146,7 @@ export default function ConnectionsPage() {
                 {/* Key and telemetry stats */}
                 <div className="mt-5 space-y-2.5">
                   <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-2.5 flex items-center justify-between">
-                    <span className="text-[11px] text-zinc-500 font-mono flex items-center gap-1.5">
+                    <span className="text-xs text-zinc-400 font-mono flex items-center gap-1.5">
                       <Key className="h-3 w-3 text-zinc-400" />
                       API Key
                     </span>
@@ -155,11 +155,11 @@ export default function ConnectionsPage() {
 
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     <div className="bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-2">
-                      <div className="text-[10px] text-zinc-500">Benchmark Latency</div>
+                      <div className="text-xs text-zinc-400">Benchmark Latency</div>
                       <div className="text-xs font-mono text-cyan-400 font-semibold mt-0.5">{conn.latency}</div>
                     </div>
                     <div className="bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-2">
-                      <div className="text-[10px] text-zinc-500">Accessible Models</div>
+                      <div className="text-xs text-zinc-400">Accessible Models</div>
                       <div className="text-xs font-mono text-zinc-300 font-semibold mt-0.5">
                         {conn.modelsCount} Voices/Models
                       </div>

@@ -47,7 +47,7 @@ export default function KnowledgeBasePage() {
             </span>
           </h1>
           <p className="text-xs text-zinc-400 mt-1">
-            Ground your ElevenLabs voice agents in verified product manuals, company policies, and live API endpoints.
+            Ground your Dograh voice agents in verified product manuals, company policies, and live API endpoints.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -91,7 +91,7 @@ export default function KnowledgeBasePage() {
       {/* Search & Document Count */}
       <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="relative w-full sm:w-72">
-          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-500" />
+          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-400" />
           <Input
             placeholder="Filter indexed documents..."
             className="pl-8 bg-[#111215] border-zinc-800/80 text-xs text-zinc-200 placeholder:text-zinc-600 rounded-xl h-8 focus-visible:ring-zinc-700"
@@ -99,7 +99,7 @@ export default function KnowledgeBasePage() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <span className="text-xs text-zinc-500 font-mono">
+        <span className="text-xs text-zinc-400 font-mono">
           Embedding Model: text-embedding-3-small (1536 dims)
         </span>
       </div>
@@ -130,20 +130,20 @@ export default function KnowledgeBasePage() {
                     )}
                     <div>
                       <div className="font-medium text-xs text-white">{doc.name}</div>
-                      <div className="text-[10px] text-zinc-500 font-mono mt-0.5">ID: {doc.id}</div>
+                      <div className="text-xs text-zinc-400 font-mono mt-0.5">ID: {doc.id}</div>
                     </div>
                   </div>
                 </TableCell>
 
                 <TableCell className="py-3">
-                  <Badge variant="outline" className="border-zinc-800 bg-zinc-900 text-zinc-300 text-[10px] uppercase font-mono">
+                  <Badge variant="outline" className="border-zinc-800 bg-zinc-900 text-zinc-300 text-xs uppercase font-mono">
                     {doc.file_type}
                   </Badge>
                 </TableCell>
 
                 <TableCell className="py-3 text-xs font-mono text-zinc-300">
                   <div className="flex items-center gap-1.5">
-                    <Layers className="h-3 w-3 text-zinc-500" />
+                    <Layers className="h-3 w-3 text-zinc-400" />
                     {doc.total_chunks} chunks
                   </div>
                 </TableCell>
@@ -155,7 +155,7 @@ export default function KnowledgeBasePage() {
                 <TableCell className="py-3">
                   <Badge
                     variant="outline"
-                    className="border-emerald-800/60 text-emerald-400 bg-emerald-950/30 text-[10px] capitalize flex items-center gap-1 w-fit font-medium"
+                    className="border-emerald-800/60 text-emerald-400 bg-emerald-950/30 text-xs capitalize flex items-center gap-1 w-fit font-medium"
                   >
                     <CheckCircle2 className="h-3 w-3" />
                     {doc.status}
@@ -179,7 +179,7 @@ export default function KnowledgeBasePage() {
                     size="sm"
                     variant="ghost"
                     onClick={() => alert(`Deleted ${doc.name}`)}
-                    className="h-7 w-7 p-0 text-zinc-500 hover:text-rose-400 hover:bg-rose-950/30 rounded-lg"
+                    className="h-7 w-7 p-0 text-zinc-400 hover:text-rose-400 hover:bg-rose-950/30 rounded-lg"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
                   </Button>

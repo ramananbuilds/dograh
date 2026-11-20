@@ -21,7 +21,7 @@ export function ToolSelector() {
           <Wrench className="h-4 w-4 text-emerald-400" />
           Agent Tools & Actions
         </h3>
-        <span className="text-[11px] font-mono text-zinc-400">
+        <span className="text-xs font-mono text-zinc-400">
           {Object.values(activeTools).filter(Boolean).length} Active
         </span>
       </div>
@@ -50,7 +50,7 @@ export function ToolSelector() {
                     {t.tool_type.replace('_', ' ')}
                   </Badge>
                 </div>
-                <p className="text-[11px] text-zinc-400 line-clamp-1">{t.description}</p>
+                <p className="text-xs text-zinc-400 line-clamp-1">{t.description}</p>
               </div>
 
               <div

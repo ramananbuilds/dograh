@@ -57,12 +57,12 @@ export function TestCall({ agentId: _agentId }: { agentId: string }) {
           <div className="flex flex-col items-center justify-center p-4 rounded-xl border border-dashed bg-muted/40 text-center space-y-3">
             {isCalling ? (
               <>
-                <div className="flex items-center gap-1.5 h-10">
-                  <span className="w-1.5 h-6 bg-primary rounded-full animate-bounce [animation-delay:-0.3s]" />
-                  <span className="w-1.5 h-10 bg-primary rounded-full animate-bounce [animation-delay:-0.15s]" />
-                  <span className="w-1.5 h-8 bg-primary rounded-full animate-bounce" />
-                  <span className="w-1.5 h-12 bg-primary rounded-full animate-bounce [animation-delay:0.15s]" />
-                  <span className="w-1.5 h-5 bg-primary rounded-full animate-bounce [animation-delay:0.3s]" />
+                <div className="flex items-center gap-1.5 h-12">
+                  <span className="w-1.5 bg-brand rounded-full wave-bar [animation-delay:-0.9s]" />
+                  <span className="w-1.5 bg-brand rounded-full wave-bar [animation-delay:-0.6s]" />
+                  <span className="w-1.5 bg-brand rounded-full wave-bar [animation-delay:-0.3s]" />
+                  <span className="w-1.5 bg-brand rounded-full wave-bar" />
+                  <span className="w-1.5 bg-brand rounded-full wave-bar [animation-delay:0.3s]" />
                 </div>
                 <div className="text-xs font-mono text-emerald-600 font-semibold">
                   Connected: 0:{callDuration < 10 ? `0${callDuration}` : callDuration}

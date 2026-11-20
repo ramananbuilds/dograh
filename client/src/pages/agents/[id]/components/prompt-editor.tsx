@@ -85,7 +85,7 @@ Tone & Style:
               <Badge
                 key={v}
                 variant="outline"
-                className="cursor-pointer hover:bg-muted hover:border-primary transition-colors text-[11px] font-mono gap-1"
+                className="cursor-pointer hover:bg-muted hover:border-primary transition-colors text-xs font-mono gap-1"
                 onClick={() => insertVariable(v)}
               >
                 <Plus className="h-2.5 w-2.5" />

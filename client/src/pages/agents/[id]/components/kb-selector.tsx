@@ -20,7 +20,7 @@ export function KbSelector() {
           <BookOpen className="h-4 w-4 text-cyan-400" />
           Grounding Knowledge Bases
         </h3>
-        <span className="text-[11px] font-mono text-zinc-400">
+        <span className="text-xs font-mono text-zinc-400">
           {Object.values(selectedDocs).filter(Boolean).length} Attached
         </span>
       </div>
@@ -44,7 +44,7 @@ export function KbSelector() {
                   <FileText className="h-3.5 w-3.5 text-zinc-400" />
                   <span className="text-xs font-semibold text-white truncate max-w-xs">{doc.name}</span>
                 </div>
-                <div className="text-[10px] text-zinc-500 font-mono">
+                <div className="text-xs text-zinc-400 font-mono">
                   {doc.total_chunks} chunks · {doc.file_type.toUpperCase()}
                 </div>
               </div>

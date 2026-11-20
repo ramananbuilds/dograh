@@ -51,7 +51,7 @@ export default function AgentEmbedPage() {
           {snippet}
         </pre>
 
-        <div className="text-[11px] text-zinc-400 bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-3 flex items-center gap-2">
+        <div className="text-xs text-zinc-400 bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-3 flex items-center gap-2">
           <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0" />
           <span>
             Microphone permissions are requested dynamically over secure HTTPS WebRTC transport with Opus audio encoding.

@@ -79,7 +79,7 @@ export default function ApiKeysPage() {
                     <Key className="h-3.5 w-3.5 text-zinc-400" />
                     <span className="font-medium text-xs text-white">{key.name}</span>
                   </div>
-                  <div className="text-[10px] text-zinc-500 font-mono mt-0.5">ID: {key.id}</div>
+                  <div className="text-xs text-zinc-400 font-mono mt-0.5">ID: {key.id}</div>
                 </TableCell>
 
                 <TableCell className="py-3">
@@ -94,7 +94,7 @@ export default function ApiKeysPage() {
                       <Badge
                         key={scope}
                         variant="outline"
-                        className="border-zinc-800 bg-zinc-900/60 text-zinc-400 text-[10px] font-mono"
+                        className="border-zinc-800 bg-zinc-900/60 text-zinc-400 text-xs font-mono"
                       >
                         {scope}
                       </Badge>
@@ -122,13 +122,13 @@ export default function ApiKeysPage() {
                     ) : (
                       <Copy className="h-3.5 w-3.5 text-zinc-400" />
                     )}
-                    <span className="ml-1 text-[11px]">{copiedId === key.id ? 'Copied' : 'Copy'}</span>
+                    <span className="ml-1 text-xs">{copiedId === key.id ? 'Copied' : 'Copy'}</span>
                   </Button>
                   <Button
                     size="sm"
                     variant="ghost"
                     onClick={() => alert(`Revoked key ${key.id}`)}
-                    className="h-7 w-7 p-0 text-zinc-500 hover:text-rose-400 hover:bg-rose-950/30 rounded-lg"
+                    className="h-7 w-7 p-0 text-zinc-400 hover:text-rose-400 hover:bg-rose-950/30 rounded-lg"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
                   </Button>
@@ -150,7 +150,7 @@ export default function ApiKeysPage() {
 
 client = DograhClient(api_key="dg_live_89a3...")
 
-# Trigger outbound call with ElevenLabs voice agent
+# Trigger outbound call with a Dograh voice agent
 call = client.calls.create(
     to="+919845012345",
     agent_id="agent_support_rachel",

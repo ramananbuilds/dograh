@@ -31,7 +31,7 @@ export default function AgentRunsPage() {
             </span>
           </h1>
           <p className="text-xs text-zinc-400">
-            Audit conversational latency, ElevenLabs audio synthesis logs, and user sentiments for agent {id}.
+            Audit conversational latency, Dograh audio synthesis logs, and user sentiments for agent {id}.
           </p>
         </div>
       </div>
@@ -54,7 +54,7 @@ export default function AgentRunsPage() {
           <TableBody>
             {runs.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={8} className="text-center py-12 text-zinc-500 text-xs">
+                <TableCell colSpan={8} className="text-center py-12 text-zinc-400 text-xs">
                   No call runs recorded yet for this agent.
                 </TableCell>
               </TableRow>
@@ -98,7 +98,7 @@ export default function AgentRunsPage() {
                     <TableCell className="py-3">
                       <Badge
                         variant="outline"
-                        className={`text-[10px] capitalize font-medium ${
+                        className={`text-xs capitalize font-medium ${
                           r.status === 'completed'
                             ? 'border-emerald-800/60 text-emerald-400 bg-emerald-950/30'
                             : r.status === 'in_progress'

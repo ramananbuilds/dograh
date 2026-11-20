@@ -20,7 +20,7 @@ const PRESET_VOICES = [
     gender: 'Female',
     accent: 'American',
     style: 'Calm & Professional',
-    model: 'ElevenLabs Turbo v2.5',
+    model: 'Dograh Turbo v2.5',
     latency: '120ms',
   },
   {
@@ -29,7 +29,7 @@ const PRESET_VOICES = [
     gender: 'Male',
     accent: 'American',
     style: 'Deep & Authoritative',
-    model: 'ElevenLabs Turbo v2.5',
+    model: 'Dograh Turbo v2.5',
     latency: '125ms',
   },
   {
@@ -38,7 +38,7 @@ const PRESET_VOICES = [
     gender: 'Male',
     accent: 'British',
     style: 'Warm & Conversational',
-    model: 'ElevenLabs Multilingual v2',
+    model: 'Dograh Multilingual v2',
     latency: '140ms',
   },
   {
@@ -47,7 +47,7 @@ const PRESET_VOICES = [
     gender: 'Female',
     accent: 'Indian / Global',
     style: 'Friendly & Cheerful',
-    model: 'ElevenLabs Turbo v2.5',
+    model: 'Dograh Turbo v2.5',
     latency: '115ms',
   },
 ];
@@ -88,7 +88,7 @@ export default function CreateAgentPage() {
           Create Voice Agent
         </h1>
         <p className="text-xs text-zinc-400">
-          Configure persona, select an ElevenLabs synthetic voice, and author the opening conversation turn.
+          Configure persona, select a Dograh synthetic voice, and author the opening conversation turn.
         </p>
       </div>
 
@@ -136,14 +136,14 @@ export default function CreateAgentPage() {
           </div>
         </div>
 
-        {/* ElevenLabs Voice Selector Grid */}
+        {/* Voice selector grid */}
         <div className="rounded-2xl border border-zinc-800/80 bg-[#111215] p-6 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-sm font-semibold text-white flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-white" />
-              ElevenLabs Voice Engine
+              Dograh Voice Engine
             </h2>
-            <span className="text-[11px] text-zinc-400 font-mono">192kbps MP3 Streaming</span>
+            <span className="text-xs text-zinc-400 font-mono">192kbps MP3 Streaming</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -165,10 +165,10 @@ export default function CreateAgentPage() {
                     <div>
                       <div className="font-semibold text-sm text-white flex items-center gap-1.5">
                         {voice.name}
-                        <span className="text-[10px] text-zinc-400 font-normal">({voice.accent})</span>
+                        <span className="text-xs text-zinc-400 font-normal">({voice.accent})</span>
                       </div>
                       <div className="text-xs text-zinc-400 mt-0.5">{voice.style}</div>
-                      <div className="text-[10px] text-cyan-400 font-mono mt-1">
+                      <div className="text-xs text-cyan-400 font-mono mt-1">
                         {voice.model} · {voice.latency}
                       </div>
                     </div>
@@ -219,8 +219,8 @@ export default function CreateAgentPage() {
                 }`}
               >
                 <div className="font-semibold text-xs text-white">{m.name}</div>
-                <div className="text-[10px] text-cyan-400 font-mono mt-0.5">{m.latency}</div>
-                <div className="text-[10px] text-zinc-500 mt-0.5">{m.provider}</div>
+                <div className="text-xs text-cyan-400 font-mono mt-0.5">{m.latency}</div>
+                <div className="text-xs text-zinc-400 mt-0.5">{m.provider}</div>
               </div>
             ))}
           </div>

@@ -17,7 +17,7 @@ export function CampaignHeader({ campaign }: { campaign: Campaign }) {
             Campaigns
           </Link>
           <span>/</span>
-          <span className="font-mono text-zinc-500">{campaign.id}</span>
+          <span className="font-mono text-zinc-400">{campaign.id}</span>
         </div>
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-bold tracking-tight text-white">{campaign.name}</h1>
@@ -33,7 +33,7 @@ export function CampaignHeader({ campaign }: { campaign: Campaign }) {
           >
             {campaign.status}
           </Badge>
-          <span className="text-xs text-zinc-500 font-mono flex items-center gap-1">
+          <span className="text-xs text-zinc-400 font-mono flex items-center gap-1">
             <ShieldCheck className="h-3 w-3 text-zinc-400" />
             DND Compliant (TRAI India)
           </span>

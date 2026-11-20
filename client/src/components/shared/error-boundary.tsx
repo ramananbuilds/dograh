@@ -35,7 +35,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
               </p>
             </div>
             {this.state.error?.stack && (
-              <pre className="text-[11px] font-mono text-left bg-black/60 p-3 rounded-xl border border-zinc-800/80 text-rose-300 max-h-40 overflow-auto">
+              <pre className="text-xs font-mono text-left bg-black/60 p-3 rounded-xl border border-zinc-800/80 text-rose-300 max-h-40 overflow-auto">
                 {this.state.error.stack}
               </pre>
             )}

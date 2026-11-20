@@ -53,7 +53,7 @@ export default function ToolsPage() {
             </span>
           </h1>
           <p className="text-xs text-zinc-400 mt-1">
-            Empower ElevenLabs voice agents with live HTTP webhooks, Model Context Protocol (MCP), and SIP call transfer actions.
+            Empower Dograh voice agents with live HTTP webhooks, Model Context Protocol (MCP), and SIP call transfer actions.
           </p>
         </div>
         <Button
@@ -84,13 +84,13 @@ export default function ToolsPage() {
                     </div>
                     <div>
                       <h3 className="font-mono font-semibold text-sm text-white">{tool.name}</h3>
-                      <div className="text-[10px] text-zinc-500 font-mono mt-0.5">ID: {tool.id}</div>
+                      <div className="text-xs text-zinc-400 font-mono mt-0.5">ID: {tool.id}</div>
                     </div>
                   </div>
 
                   <Badge
                     variant="outline"
-                    className="border-zinc-800 bg-zinc-900/60 text-zinc-300 text-[10px] uppercase font-mono"
+                    className="border-zinc-800 bg-zinc-900/60 text-zinc-300 text-xs uppercase font-mono"
                   >
                     {tool.tool_type.replace('_', ' ')}
                   </Badge>
@@ -102,10 +102,10 @@ export default function ToolsPage() {
 
                 {/* Definition details */}
                 {tool.definition && (
-                  <div className="mt-4 bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3 font-mono text-[11px] space-y-1 text-zinc-300">
+                  <div className="mt-4 bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3 font-mono text-xs space-y-1 text-zinc-300">
                     {tool.definition.url && (
                       <div className="truncate text-zinc-400">
-                        <span className="text-zinc-500 uppercase">{tool.definition.method || 'POST'}</span> {tool.definition.url}
+                        <span className="text-zinc-400 uppercase">{tool.definition.method || 'POST'}</span> {tool.definition.url}
                       </div>
                     )}
                     {tool.definition.target_sip && (
@@ -114,7 +114,7 @@ export default function ToolsPage() {
                       </div>
                     )}
                     {tool.definition.parameters && (
-                      <div className="text-zinc-500 text-[10px] truncate">
+                      <div className="text-zinc-400 text-xs truncate">
                         Params: {tool.definition.parameters.join(', ')}
                       </div>
                     )}
@@ -123,7 +123,7 @@ export default function ToolsPage() {
 
                 {/* Test Output Console */}
                 {output && (
-                  <div className="mt-3 p-2.5 bg-black/60 border border-zinc-800 rounded-lg text-[10px] font-mono text-emerald-400 break-all animate-fadeIn">
+                  <div className="mt-3 p-2.5 bg-black/60 border border-zinc-800 rounded-lg text-xs font-mono text-emerald-400 break-all animate-fadeIn">
                     {output}
                   </div>
                 )}

@@ -33,7 +33,7 @@ export default function NewCampaignPage() {
           New Outbound Campaign
         </h1>
         <p className="text-xs text-zinc-400">
-          Upload an audience list, configure concurrency pacing, and assign ElevenLabs voice workflows.
+          Upload an audience list, configure concurrency pacing, and assign Dograh voice workflows.
         </p>
       </div>
 
@@ -71,8 +71,8 @@ export default function NewCampaignPage() {
                 ))}
               </SelectContent>
             </Select>
-            <p className="text-[11px] text-zinc-500">
-              Agent will execute conversational dialog with low-latency ElevenLabs speech synthesis.
+            <p className="text-xs text-zinc-400">
+              Agent will execute conversational dialog with low-latency Dograh speech synthesis.
             </p>
           </div>
         </div>
@@ -84,20 +84,20 @@ export default function NewCampaignPage() {
               <FileSpreadsheet className="h-4 w-4 text-cyan-400" />
               Audience Contacts (CSV)
             </h2>
-            <span className="text-[11px] text-zinc-400 font-mono">Max 100,000 rows</span>
+            <span className="text-xs text-zinc-400 font-mono">Max 100,000 rows</span>
           </div>
 
           <div className="border border-dashed border-zinc-700 hover:border-zinc-500 rounded-2xl p-8 text-center bg-zinc-900/30 transition-colors cursor-pointer">
             <UploadCloud className="h-8 w-8 text-zinc-400 mx-auto mb-2" />
             <div className="text-xs font-semibold text-white">Click or drag CSV file here</div>
-            <p className="text-[11px] text-zinc-500 mt-1">
+            <p className="text-xs text-zinc-400 mt-1">
               Required column: <code className="text-zinc-400 font-mono">phone_number</code> (E.164 e.g. +91 98450 12345).
               Optional: <code className="text-zinc-400 font-mono">first_name</code>, <code className="text-zinc-400 font-mono">custom_fields</code>
             </p>
             <Input id="csv" type="file" accept=".csv" className="hidden" />
           </div>
 
-          <div className="text-[11px] text-zinc-400 bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-3 flex items-center gap-2">
+          <div className="text-xs text-zinc-400 bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-3 flex items-center gap-2">
             <ShieldAlert className="h-4 w-4 text-amber-400 shrink-0" />
             <span>
               All numbers will be automatically filtered against the National Do Not Call (DNC/NDNC) registry for India.
@@ -125,7 +125,7 @@ export default function NewCampaignPage() {
               onChange={(e) => setPacingLimit(Number(e.target.value))}
               className="w-full accent-white h-1.5 bg-zinc-800 rounded-lg cursor-pointer"
             />
-            <p className="text-[11px] text-zinc-500">
+            <p className="text-xs text-zinc-400">
               Estimated bandwidth consumption: {pacingLimit * 64} kbps G.711 voice RTP stream.
             </p>
           </div>
@@ -157,7 +157,7 @@ export default function NewCampaignPage() {
                   onChange={(e) => setSplitRatio(Number(e.target.value))}
                   className="w-full accent-cyan-400 h-1.5 bg-zinc-800 rounded-lg cursor-pointer"
                 />
-                <div className="flex justify-between text-[11px] font-mono text-zinc-500">
+                <div className="flex justify-between text-xs font-mono text-zinc-400">
                   <span>Primary Agent: {100 - splitRatio}%</span>
                   <span>Challenger Agent: {splitRatio}%</span>
                 </div>
@@ -169,7 +169,7 @@ export default function NewCampaignPage() {
         {/* Pricing & Footer Actions */}
         <div className="flex items-center justify-between border-t border-zinc-800/80 pt-5">
           <div className="text-xs text-zinc-400">
-            Est. Rate: <strong className="text-white">₹1.80/min</strong> (Includes ElevenLabs TTS + STT + SIP Outbound)
+            Est. Rate: <strong className="text-white">₹1.80/min</strong> (Includes Dograh TTS + STT + SIP Outbound)
           </div>
 
           <div className="flex items-center gap-2">

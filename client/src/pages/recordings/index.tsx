@@ -63,7 +63,7 @@ export default function RecordingsPage() {
             </span>
           </h1>
           <p className="text-xs text-zinc-400 mt-1">
-            Listen to synthesized audio recordings, analyze conversational sentiments, and audit ElevenLabs latency.
+            Listen to synthesized audio recordings, analyze conversational sentiments, and audit Dograh latency.
           </p>
         </div>
       </div>
@@ -89,7 +89,7 @@ export default function RecordingsPage() {
         <div className="bg-[#111215] border border-zinc-800/80 rounded-xl p-3.5">
           <div className="flex items-center justify-between text-zinc-400 text-xs mb-1.5">
             <span>Total Spend</span>
-            <span className="text-zinc-500 font-mono text-xs">INR</span>
+            <span className="text-zinc-400 font-mono text-xs">INR</span>
           </div>
           <div className="text-xl font-bold text-white">{formatCurrency(totalCostInr)}</div>
         </div>
@@ -97,7 +97,7 @@ export default function RecordingsPage() {
         <div className="bg-[#111215] border border-zinc-800/80 rounded-xl p-3.5">
           <div className="flex items-center justify-between text-zinc-400 text-xs mb-1.5">
             <span>Avg Pipeline Latency</span>
-            <span className="text-cyan-400 font-mono text-[11px]">TTS TTFB</span>
+            <span className="text-cyan-400 font-mono text-xs">TTS TTFB</span>
           </div>
           <div className="text-xl font-bold text-cyan-400 font-mono">590ms</div>
         </div>
@@ -106,7 +106,7 @@ export default function RecordingsPage() {
       {/* Filter and Search Bar */}
       <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="relative w-full sm:w-80">
-          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-500" />
+          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-400" />
           <Input
             placeholder="Search by phone, voice, or transcript..."
             className="pl-8 bg-[#111215] border-zinc-800/80 text-xs text-zinc-200 placeholder:text-zinc-600 rounded-xl h-8 focus-visible:ring-zinc-700"
@@ -149,7 +149,7 @@ export default function RecordingsPage() {
           <TableBody>
             {filteredRecordings.length === 0 && !isLoading ? (
               <TableRow>
-                <TableCell colSpan={8} className="text-center py-12 text-zinc-500 text-xs">
+                <TableCell colSpan={8} className="text-center py-12 text-zinc-400 text-xs">
                   No voice recordings found matching filter criteria.
                 </TableCell>
               </TableRow>
@@ -193,14 +193,14 @@ export default function RecordingsPage() {
                         )}
                         {rec.caller_number}
                       </div>
-                      <div className="text-[10px] text-zinc-500 font-mono mt-0.5">
+                      <div className="text-xs text-zinc-400 font-mono mt-0.5">
                         {formatDateTime(rec.created_at)}
                       </div>
                     </TableCell>
 
                     <TableCell className="py-3">
                       <div className="text-xs text-zinc-200 font-medium">{rec.agent_name}</div>
-                      <div className="text-[10px] text-cyan-400 font-mono mt-0.5">
+                      <div className="text-xs text-cyan-400 font-mono mt-0.5">
                         Latency: {rec.latency_ms}ms TTFT
                       </div>
                     </TableCell>
@@ -218,7 +218,7 @@ export default function RecordingsPage() {
                     <TableCell className="py-3">
                       <Badge
                         variant="outline"
-                        className={`text-[10px] capitalize font-medium flex items-center gap-1 w-fit ${
+                        className={`text-xs capitalize font-medium flex items-center gap-1 w-fit ${
                           rec.sentiment === 'positive'
                             ? 'border-emerald-800/60 text-emerald-400 bg-emerald-950/30'
                             : rec.sentiment === 'neutral'
@@ -256,7 +256,7 @@ export default function RecordingsPage() {
         </Table>
       </div>
 
-      {/* Persistent ElevenLabs Bottom Audio Dock */}
+      {/* Persistent bottom audio dock */}
       {activeTrack && (
         <div className="fixed bottom-4 left-64 right-4 z-40 bg-[#111215]/95 backdrop-blur-xl border border-zinc-800 rounded-2xl p-4 shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-slideUp">
           <div className="flex items-center gap-3">
@@ -270,9 +270,9 @@ export default function RecordingsPage() {
             <div>
               <div className="text-xs font-semibold text-white flex items-center gap-2">
                 {activeTrack.caller_number}
-                <span className="text-[11px] font-normal text-zinc-400">· {activeTrack.agent_name}</span>
+                <span className="text-xs font-normal text-zinc-400">· {activeTrack.agent_name}</span>
               </div>
-              <div className="text-[11px] text-zinc-400 font-mono mt-0.5">
+              <div className="text-xs text-zinc-400 font-mono mt-0.5">
                 Duration: {formatDuration(activeTrack.duration_seconds)} · Rate: {formatCurrency(activeTrack.cost_inr)}
               </div>
             </div>
@@ -301,7 +301,7 @@ export default function RecordingsPage() {
                 <button
                   key={spd}
                   onClick={() => setPlaybackSpeed(spd)}
-                  className={`px-2 py-0.5 text-[10px] font-mono rounded ${
+                  className={`px-2 py-0.5 text-xs font-mono rounded ${
                     playbackSpeed === spd ? 'bg-zinc-700 text-white' : 'text-zinc-400 hover:text-zinc-200'
                   }`}
                 >

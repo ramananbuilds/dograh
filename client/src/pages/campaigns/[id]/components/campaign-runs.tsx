@@ -22,7 +22,7 @@ export function CampaignRuns({ campaignId }: { campaignId: string }) {
           <p className="text-xs text-zinc-400 mt-0.5">Live audio recordings and disposition logs</p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-zinc-500 font-mono">Showing {runs.length} latest calls</span>
+          <span className="text-xs text-zinc-400 font-mono">Showing {runs.length} latest calls</span>
         </div>
       </div>
 
@@ -44,7 +44,7 @@ export function CampaignRuns({ campaignId }: { campaignId: string }) {
               const isPlaying = playingRunId === r.id;
               const phone = r.annotations?.phone || '+91 98450 12345';
               const disposition = r.annotations?.disposition || (r.status === 'completed' ? 'answered' : 'failed');
-              const agent = r.annotations?.agent_version || 'ElevenLabs Turbo v2.5';
+              const agent = r.annotations?.agent_version || 'Dograh Turbo v2.5';
               const costInr = r.cost_info?.total_inr ?? ((r.duration || 60) / 60) * 1.8;
 
               return (
@@ -69,7 +69,7 @@ export function CampaignRuns({ campaignId }: { campaignId: string }) {
                       <PhoneCall className="h-3 w-3 text-zinc-400" />
                       {phone}
                     </div>
-                    <div className="text-[10px] text-zinc-500 font-mono mt-0.5">ID: {r.id.substring(0, 14)}</div>
+                    <div className="text-xs text-zinc-400 font-mono mt-0.5">ID: {r.id.substring(0, 14)}</div>
                   </TableCell>
 
                   <TableCell className="py-2.5">
@@ -82,7 +82,7 @@ export function CampaignRuns({ campaignId }: { campaignId: string }) {
                   <TableCell className="py-2.5">
                     <Badge
                       variant="outline"
-                      className={`text-[10px] capitalize font-medium ${
+                      className={`text-xs capitalize font-medium ${
                         disposition === 'answered'
                           ? 'border-emerald-800/60 text-emerald-400 bg-emerald-950/30'
                           : disposition === 'transferred'

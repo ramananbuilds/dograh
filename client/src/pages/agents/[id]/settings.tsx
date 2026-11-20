@@ -34,7 +34,7 @@ export default function AgentSettingsPage() {
               defaultValue={900}
               className="bg-zinc-900/60 border-zinc-800 text-xs text-zinc-200 rounded-xl h-9"
             />
-            <p className="text-[11px] text-zinc-500">
+            <p className="text-xs text-zinc-400">
               Calls exceeding this threshold will automatically announce a polite goodbye and hang up.
             </p>
           </div>

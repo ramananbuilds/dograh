@@ -37,19 +37,35 @@ import { useReports } from '@/hooks/use-reports';
 import { useAgentRuns } from '@/hooks/use-agent-runs';
 import { formatDuration, formatRelativeTime, formatCurrency } from '@/lib/format';
 
-const DISPOSITION_COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6'];
+import { IS_DEMO_MODE } from '@/lib/demo-mode';
+import { DemoBadge } from '@/components/shared/demo-badge';
+
+/**
+ * Stable per-agent demo call count. Was `Math.random()` in render, which meant
+ * every re-render reshuffled the column — the table never held still.
+ */
+function demoCallCount(id: string) {
+  let hash = 0;
+  for (let i = 0; i < id.length; i += 1) {
+    hash = (hash * 31 + id.charCodeAt(i)) % 1000;
+  }
+  return 20 + (hash % 80);
+}
+
+// Dograh brand cyan anchors the chart palette; emerald/amber/pink are data hues.
+const DISPOSITION_COLORS = ['#38bdf8', '#10b981', '#f59e0b', '#ec4899', '#22d3ee'];
 const DISPOSITION_SHADOWS = [
-  'hover:[filter:drop-shadow(0_12px_22px_rgba(99,102,241,0.55))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
-  'hover:[filter:drop-shadow(0_12px_22px_rgba(16,185,129,0.55))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
-  'hover:[filter:drop-shadow(0_12px_22px_rgba(245,158,11,0.55))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
-  'hover:[filter:drop-shadow(0_12px_22px_rgba(236,72,153,0.55))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
-  'hover:[filter:drop-shadow(0_12px_22px_rgba(139,92,246,0.55))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
+  'hover:[filter:drop-shadow(0_12px_22px_rgba(56,189,248,0.45))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
+  'hover:[filter:drop-shadow(0_12px_22px_rgba(16,185,129,0.45))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
+  'hover:[filter:drop-shadow(0_12px_22px_rgba(245,158,11,0.45))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
+  'hover:[filter:drop-shadow(0_12px_22px_rgba(236,72,153,0.45))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
+  'hover:[filter:drop-shadow(0_12px_22px_rgba(34,211,238,0.45))_drop-shadow(0_4px_8px_rgba(0,0,0,0.85))]',
 ];
-const LATENCY_COLORS = ['#06b6d4', '#6366f1', '#a855f7'];
+const LATENCY_COLORS = ['#38bdf8', '#22d3ee', '#0ea5e9'];
 const LATENCY_SHADOWS = [
-  'hover:[filter:drop-shadow(0_12px_20px_rgba(6,182,212,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
-  'hover:[filter:drop-shadow(0_12px_20px_rgba(99,102,241,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
-  'hover:[filter:drop-shadow(0_12px_20px_rgba(168,85,247,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
+  'hover:[filter:drop-shadow(0_12px_20px_rgba(56,189,248,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
+  'hover:[filter:drop-shadow(0_12px_20px_rgba(34,211,238,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
+  'hover:[filter:drop-shadow(0_12px_20px_rgba(14,165,233,0.45))_drop-shadow(0_4px_6px_rgba(0,0,0,0.8))]',
 ];
 
 export default function DashboardPage() {
@@ -88,9 +104,12 @@ export default function DashboardPage() {
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Engine Online (ap-south-1)
             </Badge>
+            <DemoBadge />
           </div>
-          <p className="text-xs text-zinc-400 mt-1">
-            Real-time pipeline metrics, call traffic, voice agent health, and outbound campaigns.
+          <p className="text-sm text-zinc-400 mt-1">
+            {IS_DEMO_MODE
+              ? 'Illustrative pipeline metrics, call traffic, and agent health — no backend is connected.'
+              : 'Real-time pipeline metrics, call traffic, voice agent health, and outbound campaigns.'}
           </p>
         </div>
 
@@ -141,15 +160,15 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* KPI Cards Row (ElevenLabs obsidian cards) */}
+      {/* KPI cards row */}
       <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-6">
         {/* Total Calls */}
         <Card className="bg-[#111215] border-zinc-800/80 hover:border-zinc-700/80 transition-all rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between pb-2 pt-4 px-4">
-            <CardTitle className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">
+            <CardTitle className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
               Total Calls
             </CardTitle>
-            <div className="p-1.5 bg-indigo-500/10 rounded-lg text-indigo-400">
+            <div className="p-1.5 bg-brand/10 rounded-lg text-brand">
               <PhoneCall className="h-3.5 w-3.5" />
             </div>
           </CardHeader>
@@ -157,10 +176,10 @@ export default function DashboardPage() {
             <div className="text-2xl font-bold font-mono tracking-tight text-white">
               {metrics.total_runs.toLocaleString()}
             </div>
-            <div className="flex items-center gap-1 text-[11px] text-emerald-400 mt-1 font-medium">
+            <div className="flex items-center gap-1 text-xs text-emerald-400 mt-1 font-medium">
               <ArrowUpRight className="h-3 w-3" />
               <span>+14.2%</span>
-              <span className="text-zinc-500 font-normal">vs yesterday</span>
+              <span className="text-zinc-400 font-normal">vs yesterday</span>
             </div>
           </CardContent>
         </Card>
@@ -168,7 +187,7 @@ export default function DashboardPage() {
         {/* Talk Time */}
         <Card className="bg-[#111215] border-zinc-800/80 hover:border-zinc-700/80 transition-all rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between pb-2 pt-4 px-4">
-            <CardTitle className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">
+            <CardTitle className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
               Voice Talk Time
             </CardTitle>
             <div className="p-1.5 bg-blue-500/10 rounded-lg text-blue-400">
@@ -179,7 +198,7 @@ export default function DashboardPage() {
             <div className="text-2xl font-bold font-mono tracking-tight text-white">
               {Math.floor(metrics.total_duration_seconds / 60)}m {metrics.total_duration_seconds % 60}s
             </div>
-            <p className="text-[11px] text-zinc-400 mt-1 font-mono">
+            <p className="text-xs text-zinc-400 mt-1 font-mono">
               Avg {formatDuration(metrics.avg_duration_seconds)} / call
             </p>
           </CardContent>
@@ -188,7 +207,7 @@ export default function DashboardPage() {
         {/* Success / Answer Rate */}
         <Card className="bg-[#111215] border-zinc-800/80 hover:border-zinc-700/80 transition-all rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between pb-2 pt-4 px-4">
-            <CardTitle className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">
+            <CardTitle className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
               Completion Rate
             </CardTitle>
             <div className="p-1.5 bg-emerald-500/10 rounded-lg text-emerald-400">
@@ -199,7 +218,7 @@ export default function DashboardPage() {
             <div className="text-2xl font-bold font-mono tracking-tight text-emerald-400">
               {((metrics.completed_runs / (metrics.total_runs || 1)) * 100).toFixed(1)}%
             </div>
-            <p className="text-[11px] text-zinc-400 mt-1">
+            <p className="text-xs text-zinc-400 mt-1">
               {metrics.completed_runs} successful resolutions
             </p>
           </CardContent>
@@ -208,7 +227,7 @@ export default function DashboardPage() {
         {/* Transfers (XFER) */}
         <Card className="bg-[#111215] border-zinc-800/80 hover:border-zinc-700/80 transition-all rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between pb-2 pt-4 px-4">
-            <CardTitle className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">
+            <CardTitle className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
               Warm Handoffs
             </CardTitle>
             <div className="p-1.5 bg-amber-500/10 rounded-lg text-amber-400">
@@ -219,7 +238,7 @@ export default function DashboardPage() {
             <div className="text-2xl font-bold font-mono tracking-tight text-white">
               {metrics.xfer_count}
             </div>
-            <p className="text-[11px] text-zinc-400 mt-1">
+            <p className="text-xs text-zinc-400 mt-1">
               {((metrics.xfer_count / (metrics.total_runs || 1)) * 100).toFixed(1)}% transferred to human
             </p>
           </CardContent>
@@ -228,25 +247,25 @@ export default function DashboardPage() {
         {/* First-Turn TTFB Latency */}
         <Card className="bg-[#111215] border-zinc-800/80 hover:border-zinc-700/80 transition-all rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between pb-2 pt-4 px-4">
-            <CardTitle className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">
+            <CardTitle className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
               Avg Voice TTFB
             </CardTitle>
-            <div className="p-1.5 bg-purple-500/10 rounded-lg text-purple-400">
+            <div className="p-1.5 bg-brand/10 rounded-lg text-brand">
               <Zap className="h-3.5 w-3.5" />
             </div>
           </CardHeader>
           <CardContent className="px-4 pb-4">
-            <div className="text-2xl font-bold font-mono tracking-tight text-purple-400">
+            <div className="text-2xl font-bold font-mono tracking-tight text-brand">
               {metrics.avg_ttfb_ms} ms
             </div>
-            <p className="text-[11px] text-zinc-400 mt-1">ElevenLabs low-latency tier</p>
+            <p className="text-xs text-zinc-400 mt-1">Dograh low-latency tier</p>
           </CardContent>
         </Card>
 
         {/* Total Cost in INR */}
         <Card className="bg-[#111215] border-zinc-800/80 hover:border-zinc-700/80 transition-all rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between pb-2 pt-4 px-4">
-            <CardTitle className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">
+            <CardTitle className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
               Period Cost (INR)
             </CardTitle>
             <div className="p-1.5 bg-emerald-500/10 rounded-lg text-emerald-400">
@@ -257,7 +276,7 @@ export default function DashboardPage() {
             <div className="text-2xl font-bold font-mono tracking-tight text-white">
               {formatCurrency(metrics.total_cost)}
             </div>
-            <p className="text-[11px] text-zinc-400 mt-1 font-mono">~₹3.48 / min blended</p>
+            <p className="text-xs text-zinc-400 mt-1 font-mono">~₹3.48 / min blended</p>
           </CardContent>
         </Card>
       </div>
@@ -277,11 +296,11 @@ export default function DashboardPage() {
             </div>
             <div className="flex items-center gap-4 text-xs font-medium">
               <div className="flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-indigo-500" />
+                <span className="h-2.5 w-2.5 rounded-full bg-brand" />
                 <span className="text-zinc-300">Call Volume</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-purple-400" />
+                <span className="h-2.5 w-2.5 rounded-full bg-brand" />
                 <span className="text-zinc-300">Peak Concurrency</span>
               </div>
             </div>
@@ -309,8 +328,8 @@ export default function DashboardPage() {
                         return (
                           <div className="rounded-xl border border-zinc-800 bg-[#16181d] p-3 shadow-2xl text-xs space-y-1">
                             <div className="font-semibold text-white">{payload[0]?.payload?.time}</div>
-                            <div className="text-indigo-400 font-mono">Calls: {payload[0]?.value}</div>
-                            <div className="text-purple-400 font-mono">
+                            <div className="text-brand font-mono">Calls: {payload[0]?.value}</div>
+                            <div className="text-brand font-mono">
                               Channels Active: {payload[1]?.value}
                             </div>
                           </div>
@@ -400,11 +419,11 @@ export default function DashboardPage() {
                       className="h-2 w-2 rounded-full"
                       style={{ backgroundColor: DISPOSITION_COLORS[index % DISPOSITION_COLORS.length] }}
                     />
-                    <span className="truncate max-w-[140px] text-zinc-300 text-[11px]">
+                    <span className="truncate max-w-[140px] text-zinc-300 text-xs">
                       {item.disposition}
                     </span>
                   </div>
-                  <span className="font-mono text-zinc-400 text-[11px]">{item.percentage}%</span>
+                  <span className="font-mono text-zinc-400 text-xs">{item.percentage}%</span>
                 </div>
               ))}
             </div>
@@ -471,7 +490,7 @@ export default function DashboardPage() {
               Voice Pipeline Latency Breakdown
             </CardTitle>
             <CardDescription className="text-xs text-zinc-400">
-              Turn response time across STT, LLM reasoning, and ElevenLabs audio generation
+              Turn response time across STT, LLM reasoning, and Dograh audio generation
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -527,12 +546,12 @@ export default function DashboardPage() {
           <Table>
             <TableHeader>
               <TableRow className="border-zinc-800 hover:bg-transparent">
-                <TableHead className="text-zinc-400 text-[11px] font-semibold uppercase">Agent Name</TableHead>
-                <TableHead className="text-zinc-400 text-[11px] font-semibold uppercase">Status</TableHead>
-                <TableHead className="text-zinc-400 text-[11px] font-semibold uppercase">Voice Profile</TableHead>
-                <TableHead className="text-zinc-400 text-[11px] font-semibold uppercase">Total Runs</TableHead>
-                <TableHead className="text-zinc-400 text-[11px] font-semibold uppercase">Avg Duration</TableHead>
-                <TableHead className="text-right text-zinc-400 text-[11px] font-semibold uppercase">Actions</TableHead>
+                <TableHead className="text-zinc-400 text-xs font-semibold uppercase">Agent Name</TableHead>
+                <TableHead className="text-zinc-400 text-xs font-semibold uppercase">Status</TableHead>
+                <TableHead className="text-zinc-400 text-xs font-semibold uppercase">Voice Profile</TableHead>
+                <TableHead className="text-zinc-400 text-xs font-semibold uppercase">Total Runs</TableHead>
+                <TableHead className="text-zinc-400 text-xs font-semibold uppercase">Avg Duration</TableHead>
+                <TableHead className="text-right text-zinc-400 text-xs font-semibold uppercase">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -540,7 +559,7 @@ export default function DashboardPage() {
                 <TableRow key={agent.id} className="border-zinc-800 hover:bg-white/[0.02]">
                   <TableCell>
                     <div className="font-medium text-xs text-white">{agent.name}</div>
-                    <div className="text-[11px] text-zinc-400 truncate max-w-sm mt-0.5">
+                    <div className="text-xs text-zinc-400 truncate max-w-sm mt-0.5">
                       {agent.description || 'Voice agent workflow'}
                     </div>
                   </TableCell>
@@ -548,13 +567,13 @@ export default function DashboardPage() {
                     <StatusBadge status={agent.status} />
                   </TableCell>
                   <TableCell>
-                    <Badge variant="outline" className="text-[11px] font-normal border-zinc-800 bg-zinc-900 text-zinc-300 gap-1.5">
-                      <Volume2 className="h-3 w-3 text-indigo-400" />
-                      ElevenLabs (Rachel)
+                    <Badge variant="outline" className="text-xs font-normal border-zinc-800 bg-zinc-900 text-zinc-300 gap-1.5">
+                      <Volume2 className="h-3 w-3 text-brand" />
+                      Dograh (Rachel)
                     </Badge>
                   </TableCell>
                   <TableCell className="font-mono text-xs text-zinc-300">
-                    {Math.floor(Math.random() * 80 + 20)} calls
+                    {demoCallCount(agent.id)} calls
                   </TableCell>
                   <TableCell className="font-mono text-xs text-zinc-300">2m 14s</TableCell>
                   <TableCell className="text-right">
@@ -590,20 +609,20 @@ export default function DashboardPage() {
           <Table>
             <TableHeader>
               <TableRow className="border-zinc-800 hover:bg-transparent">
-                <TableHead className="text-zinc-400 text-[11px] font-semibold uppercase">Run ID</TableHead>
-                <TableHead className="text-zinc-400 text-[11px] font-semibold uppercase">Direction</TableHead>
-                <TableHead className="text-zinc-400 text-[11px] font-semibold uppercase">Caller ID</TableHead>
-                <TableHead className="text-zinc-400 text-[11px] font-semibold uppercase">Agent</TableHead>
-                <TableHead className="text-zinc-400 text-[11px] font-semibold uppercase">Duration</TableHead>
-                <TableHead className="text-zinc-400 text-[11px] font-semibold uppercase">Cost (INR)</TableHead>
-                <TableHead className="text-zinc-400 text-[11px] font-semibold uppercase">Time</TableHead>
-                <TableHead className="text-right text-zinc-400 text-[11px] font-semibold uppercase">Action</TableHead>
+                <TableHead className="text-zinc-400 text-xs font-semibold uppercase">Run ID</TableHead>
+                <TableHead className="text-zinc-400 text-xs font-semibold uppercase">Direction</TableHead>
+                <TableHead className="text-zinc-400 text-xs font-semibold uppercase">Caller ID</TableHead>
+                <TableHead className="text-zinc-400 text-xs font-semibold uppercase">Agent</TableHead>
+                <TableHead className="text-zinc-400 text-xs font-semibold uppercase">Duration</TableHead>
+                <TableHead className="text-zinc-400 text-xs font-semibold uppercase">Cost (INR)</TableHead>
+                <TableHead className="text-zinc-400 text-xs font-semibold uppercase">Time</TableHead>
+                <TableHead className="text-right text-zinc-400 text-xs font-semibold uppercase">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {recentRuns.map((run, idx) => (
                 <TableRow key={run.id} className="border-zinc-800 hover:bg-white/[0.02]">
-                  <TableCell className="font-mono text-xs font-semibold text-indigo-400">
+                  <TableCell className="font-mono text-xs font-semibold text-brand">
                     <Link to={`/agents/${run.workflow_id}/runs/${run.id}`} className="hover:underline">
                       {run.id}
                     </Link>
@@ -611,7 +630,7 @@ export default function DashboardPage() {
                   <TableCell>
                     <Badge
                       variant="secondary"
-                      className={`text-[10px] font-semibold uppercase rounded-md ${run.call_type === 'inbound'
+                      className={`text-xs font-semibold uppercase rounded-md ${run.call_type === 'inbound'
                         ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
                         : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
                         }`}
@@ -631,7 +650,7 @@ export default function DashboardPage() {
                   <TableCell className="text-xs font-mono font-semibold text-white">
                     {formatCurrency(idx === 0 ? 14.94 : idx === 1 ? 26.56 : idx === 2 ? 6.64 : 1.66)}
                   </TableCell>
-                  <TableCell className="text-xs text-zinc-500">
+                  <TableCell className="text-xs text-zinc-400">
                     {formatRelativeTime(run.created_at)}
                   </TableCell>
                   <TableCell className="text-right">

@@ -5,7 +5,7 @@
 @layer base {
   :root,
   .dark {
-    /* ElevenLabs Signature Obsidian & Zinc Palette */
+    /* Dograh Obsidian & Zinc Palette */
     --background: 240 10% 4.5%;       /* #0b0c0e */
     --foreground: 0 0% 98%;           /* #fafafa */
 
@@ -15,7 +15,7 @@
     --popover: 240 8% 7.5%;           /* #131417 */
     --popover-foreground: 0 0% 98%;
 
-    /* Crisp High-Contrast Primary (ElevenLabs pure white button with dark text) */
+    /* Crisp high-contrast primary: white button, dark text */
     --primary: 0 0% 98%;              /* #fafafa */
     --primary-foreground: 240 10% 4.5%; /* #0b0c0e */
 
@@ -35,6 +35,12 @@
     --input: 240 6% 15%;              /* #24262c */
     --ring: 240 5% 55%;
     --radius: 0.75rem;                /* 12px rounded aesthetic */
+
+    /* Dograh brand accent — signal cyan.
+       Owns the interactive/brand axis so emerald stays reserved for
+       "live / healthy" and rose for destructive. */
+    --brand: 189 94% 60%;             /* #38bdf8-ish signal cyan */
+    --brand-foreground: 240 10% 4.5%;
   }
 }
 
@@ -48,7 +54,7 @@
   }
 }
 
-/* Custom ElevenLabs Glass & Waveform utilities */
+/* Glass and waveform utilities */
 .glass-panel {
   background: rgba(19, 20, 23, 0.7);
   backdrop-filter: blur(16px);
@@ -56,19 +62,35 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.rounded-2xl.border,
-.rounded-xl.border,
-.glow-card {
-  transition: all 0.3s ease-out !important;
+/* Opt-in lift for genuinely clickable cards only.
+   Previously this targeted every .rounded-xl/.rounded-2xl bordered element, so
+   static metric tiles and chart containers jumped under the cursor while being read. */
+.card-interactive {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease-out, box-shadow 0.25s ease-out;
 }
 
-.rounded-2xl.border:hover,
-.rounded-xl.border:hover,
-.glow-card:hover {
-  transform: translateY(-6px) scale(1.015);
-  filter: drop-shadow(0 16px 28px rgba(99, 102, 241, 0.45)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9));
-  border-color: rgba(99, 102, 241, 0.5) !important;
-  filter: brightness(1.1) drop-shadow(0 16px 28px rgba(99, 102, 241, 0.45)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9));
+.card-interactive:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-interactive {
+    transition: none;
+  }
+  .card-interactive:hover {
+    transform: none;
+  }
+}
+
+/* Global keyboard focus — icon-only controls carry no aria-label yet,
+   so a visible ring is the only reliable affordance for keyboard users. */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* Audio Waveform Bars Animation */

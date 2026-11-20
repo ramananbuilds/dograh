@@ -18,7 +18,7 @@ import {
 const MOCK_TRANSCRIPT_DIALOG = [
   {
     role: 'agent',
-    speaker: 'Rachel (ElevenLabs Turbo v2.5)',
+    speaker: 'Rachel (Dograh Turbo v2.5)',
     text: 'Hello! Thank you for contacting Dograh Support. How can I assist you with your voice AI deployment today?',
     latency: '110ms',
     time: '0:02',
@@ -26,13 +26,13 @@ const MOCK_TRANSCRIPT_DIALOG = [
   {
     role: 'user',
     speaker: 'Caller (+91 98450 12345)',
-    text: 'Hi there, I wanted to check what the latency is when running ElevenLabs voices over India SIP trunks.',
+    text: 'Hi there, I wanted to check what the latency is when running Dograh voices over India SIP trunks.',
     latency: 'STT 140ms',
     time: '0:06',
   },
   {
     role: 'agent',
-    speaker: 'Rachel (ElevenLabs Turbo v2.5)',
+    speaker: 'Rachel (Dograh Turbo v2.5)',
     text: 'Great question! With our Mumbai and Bangalore edge gateways, average end-to-end turnaround latency is between 580 to 650 milliseconds, ensuring completely natural, interruption-ready conversation.',
     latency: '590ms TTFT',
     time: '0:14',
@@ -46,8 +46,8 @@ const MOCK_TRANSCRIPT_DIALOG = [
   },
   {
     role: 'agent',
-    speaker: 'Rachel (ElevenLabs Turbo v2.5)',
-    text: 'The standard rate is ₹1.80 per minute of connected call time, which includes ElevenLabs voice synthesis, speech-to-text, and outbound telephony. Would you like me to send you an activation email?',
+    speaker: 'Rachel (Dograh Turbo v2.5)',
+    text: 'The standard rate is ₹1.80 per minute of connected call time, which includes Dograh voice synthesis, speech-to-text, and outbound telephony. Would you like me to send you an activation email?',
     latency: '610ms TTFT',
     time: '0:31',
   },
@@ -141,12 +141,12 @@ export default function AgentRunDetailPage() {
                         : 'bg-zinc-800/60 border border-zinc-700/60 text-white'
                     }`}
                   >
-                    <div className="flex items-center justify-between gap-3 text-[11px] font-mono text-zinc-400">
+                    <div className="flex items-center justify-between gap-3 text-xs font-mono text-zinc-400">
                       <span className="font-semibold text-zinc-300">{turn.speaker}</span>
                       <span>{turn.time}</span>
                     </div>
                     <p className="leading-relaxed text-xs">{turn.text}</p>
-                    <div className="text-[10px] font-mono text-cyan-400 text-right">
+                    <div className="text-xs font-mono text-cyan-400 text-right">
                       {turn.latency}
                     </div>
                   </div>
@@ -176,8 +176,8 @@ export default function AgentRunDetailPage() {
 
               <div className="text-center">
                 <div className="text-xs font-semibold text-white">Full Stereo Master</div>
-                <div className="text-[11px] text-zinc-400 font-mono mt-0.5">
-                  184s · ElevenLabs Turbo v2.5 / G.711u
+                <div className="text-xs text-zinc-400 font-mono mt-0.5">
+                  184s · Dograh Turbo v2.5 / G.711u
                 </div>
               </div>
 
@@ -215,7 +215,7 @@ export default function AgentRunDetailPage() {
               </div>
               <div className="flex justify-between py-1.5 border-b border-zinc-800/60">
                 <span className="text-zinc-400">Voice Synthesis Engine</span>
-                <span className="font-mono text-zinc-300">ElevenLabs Turbo v2.5</span>
+                <span className="font-mono text-zinc-300">Dograh Turbo v2.5</span>
               </div>
               <div className="flex justify-between py-1.5 border-b border-zinc-800/60">
                 <span className="text-zinc-400">Reasoning LLM</span>

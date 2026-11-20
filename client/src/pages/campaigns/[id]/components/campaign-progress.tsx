@@ -38,7 +38,7 @@ export function CampaignProgress({ campaign }: { campaign: Campaign }) {
       {/* Grid Indicators */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
         <div className="bg-zinc-900/60 border border-zinc-800/70 rounded-xl p-3">
-          <div className="flex items-center gap-1.5 text-zinc-400 text-[11px]">
+          <div className="flex items-center gap-1.5 text-zinc-400 text-xs">
             <PhoneOutgoing className="h-3 w-3 text-emerald-400" />
             <span>Completed</span>
           </div>
@@ -46,7 +46,7 @@ export function CampaignProgress({ campaign }: { campaign: Campaign }) {
         </div>
 
         <div className="bg-zinc-900/60 border border-zinc-800/70 rounded-xl p-3">
-          <div className="flex items-center gap-1.5 text-zinc-400 text-[11px]">
+          <div className="flex items-center gap-1.5 text-zinc-400 text-xs">
             <Clock className="h-3 w-3 text-amber-400" />
             <span>Queued / Pending</span>
           </div>
@@ -54,7 +54,7 @@ export function CampaignProgress({ campaign }: { campaign: Campaign }) {
         </div>
 
         <div className="bg-zinc-900/60 border border-zinc-800/70 rounded-xl p-3">
-          <div className="flex items-center gap-1.5 text-zinc-400 text-[11px]">
+          <div className="flex items-center gap-1.5 text-zinc-400 text-xs">
             <Zap className="h-3 w-3 text-cyan-400" />
             <span>Pacing Rate</span>
           </div>
@@ -62,7 +62,7 @@ export function CampaignProgress({ campaign }: { campaign: Campaign }) {
         </div>
 
         <div className="bg-zinc-900/60 border border-zinc-800/70 rounded-xl p-3">
-          <div className="flex items-center gap-1.5 text-zinc-400 text-[11px]">
+          <div className="flex items-center gap-1.5 text-zinc-400 text-xs">
             <IndianRupee className="h-3 w-3 text-zinc-300" />
             <span>Cost (INR)</span>
           </div>

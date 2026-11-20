@@ -43,7 +43,7 @@ export function ModelPicker() {
         <div className="space-y-1.5">
           <div className="flex justify-between text-xs">
             <Label className="text-xs">Temperature: {temperature}</Label>
-            <span className="text-[10px] text-muted-foreground">Deterministic ↔ Creative</span>
+            <span className="text-xs text-muted-foreground">Deterministic ↔ Creative</span>
           </div>
           <input
             type="range"
@@ -63,7 +63,7 @@ export function ModelPicker() {
               <ShieldAlert className="h-3.5 w-3.5 text-amber-500" />
               <span>Multi-Provider Fallback</span>
             </div>
-            <div className="text-[11px] text-muted-foreground">
+            <div className="text-xs text-muted-foreground">
               Auto-failsafe to Claude / Gemini on timeout
             </div>
           </div>

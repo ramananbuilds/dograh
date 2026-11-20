@@ -68,7 +68,7 @@ export default function TelephonyPage() {
             </span>
           </h1>
           <p className="text-xs text-zinc-400 mt-1">
-            Connect SIP trunks, configure DIDs, and route inbound phone calls directly to ElevenLabs voice agents.
+            Connect SIP trunks, configure DIDs, and route inbound phone calls directly to Dograh voice agents.
           </p>
         </div>
         <Button
@@ -95,7 +95,7 @@ export default function TelephonyPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-sm text-white">{t.name}</h3>
-                    <div className="text-[11px] text-zinc-400 font-mono mt-0.5">
+                    <div className="text-xs text-zinc-400 font-mono mt-0.5">
                       Carrier: {t.provider}
                     </div>
                   </div>
@@ -103,7 +103,7 @@ export default function TelephonyPage() {
 
                 <Badge
                   variant="outline"
-                  className="border-emerald-800/60 text-emerald-400 bg-emerald-950/30 text-[10px] capitalize flex items-center gap-1 font-medium"
+                  className="border-emerald-800/60 text-emerald-400 bg-emerald-950/30 text-xs capitalize flex items-center gap-1 font-medium"
                 >
                   <CheckCircle2 className="h-3 w-3" />
                   {t.status}
@@ -113,7 +113,7 @@ export default function TelephonyPage() {
               {/* Trunk Details & Phone Numbers */}
               <div className="mt-5 space-y-3">
                 <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3 space-y-1.5">
-                  <div className="text-[11px] text-zinc-400 font-medium flex items-center gap-1.5">
+                  <div className="text-xs text-zinc-400 font-medium flex items-center gap-1.5">
                     <Hash className="h-3 w-3 text-zinc-400" />
                     Assigned DIDs / Numbers
                   </div>
@@ -131,13 +131,13 @@ export default function TelephonyPage() {
 
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div className="bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-2.5">
-                    <div className="text-[10px] text-zinc-500">Concurrency Capacity</div>
+                    <div className="text-xs text-zinc-400">Concurrency Capacity</div>
                     <div className="text-xs font-mono text-white font-semibold mt-0.5">
                       {t.channels} Channels
                     </div>
                   </div>
                   <div className="bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-2.5">
-                    <div className="text-[10px] text-zinc-500">Audio Codec</div>
+                    <div className="text-xs text-zinc-400">Audio Codec</div>
                     <div className="text-xs font-mono text-cyan-400 font-semibold mt-0.5">
                       G.711u / Opus
                     </div>
@@ -145,7 +145,7 @@ export default function TelephonyPage() {
                 </div>
 
                 <div className="bg-zinc-900/40 border border-zinc-800/40 rounded-xl p-2.5 text-xs space-y-1">
-                  <div className="text-[10px] text-zinc-500">Inbound Routing Target</div>
+                  <div className="text-xs text-zinc-400">Inbound Routing Target</div>
                   <div className="text-xs text-zinc-200 font-medium truncate">
                     {t.inbound_agent}
                   </div>
@@ -155,7 +155,7 @@ export default function TelephonyPage() {
 
             {/* Bottom Controls */}
             <div className="mt-5 flex items-center justify-between border-t border-zinc-800/60 pt-3">
-              <span className="text-[10px] text-zinc-500 font-mono flex items-center gap-1">
+              <span className="text-xs text-zinc-400 font-mono flex items-center gap-1">
                 <Server className="h-3 w-3" />
                 {t.sip_domain}
               </span>

@@ -171,7 +171,7 @@ export default function ReportsPage() {
             <CardTitle className="text-xs font-medium text-muted-foreground uppercase">
               Average Pipeline Latency
             </CardTitle>
-            <Zap className="h-4 w-4 text-purple-500" />
+            <Zap className="h-4 w-4 text-brand" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{metrics.avg_ttfb_ms} ms</div>
@@ -304,7 +304,7 @@ export default function ReportsPage() {
                     {d.percentage}%
                   </TableCell>
                   <TableCell className="text-right">
-                    <Badge variant="outline" className="text-[11px] font-normal">
+                    <Badge variant="outline" className="text-xs font-normal">
                       {d.disposition.includes('XFER') ? 'Escalation' : 'Resolution'}
                     </Badge>
                   </TableCell>

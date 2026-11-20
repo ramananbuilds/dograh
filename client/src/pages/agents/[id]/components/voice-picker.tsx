@@ -71,7 +71,7 @@ export function VoicePicker() {
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
             <Label className="text-xs">Voice Character</Label>
-            <span className="text-[11px] text-muted-foreground">Preview audio</span>
+            <span className="text-xs text-muted-foreground">Preview audio</span>
           </div>
           <div className="flex items-center gap-2">
             <Select value={selectedVoice} onValueChange={setSelectedVoice}>
@@ -103,7 +103,7 @@ export function VoicePicker() {
           </div>
         </div>
 
-        {/* ElevenLabs Specific Tuning Sliders */}
+        {/* Voice tuning sliders */}
         {provider === 'elevenlabs' && (
           <div className="space-y-3 pt-2 border-t">
             <div className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
@@ -114,7 +114,7 @@ export function VoicePicker() {
             <div className="space-y-1">
               <div className="flex justify-between text-xs">
                 <span className="text-muted-foreground">Stability: {stability}</span>
-                <span className="text-[10px] text-muted-foreground">More expressive ↔ More consistent</span>
+                <span className="text-xs text-muted-foreground">More expressive ↔ More consistent</span>
               </div>
               <input
                 type="range"
@@ -130,7 +130,7 @@ export function VoicePicker() {
             <div className="space-y-1">
               <div className="flex justify-between text-xs">
                 <span className="text-muted-foreground">Similarity / Clarity: {similarity}</span>
-                <span className="text-[10px] text-muted-foreground">Artifact reduction</span>
+                <span className="text-xs text-muted-foreground">Artifact reduction</span>
               </div>
               <input
                 type="range"
@@ -146,7 +146,7 @@ export function VoicePicker() {
             <div className="space-y-1">
               <div className="flex justify-between text-xs">
                 <span className="text-muted-foreground">Speaking Pace: {speed}x</span>
-                <span className="text-[10px] text-muted-foreground">0.7x ↔ 1.3x</span>
+                <span className="text-xs text-muted-foreground">0.7x ↔ 1.3x</span>
               </div>
               <input
                 type="range"

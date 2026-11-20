@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -11,6 +11,7 @@ import { useAgents } from '@/hooks/use-agents';
 
 export default function AgentsPage() {
   const { agents, isLoading } = useAgents();
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<'all' | 'active' | 'draft'>('all');
 
@@ -33,7 +34,7 @@ export default function AgentsPage() {
             </span>
           </h1>
           <p className="text-xs text-zinc-400 mt-1">
-            Build, test, and deploy interactive voice agents with ElevenLabs TTS and low-latency LLM reasoning.
+            Build, test, and deploy interactive voice agents with Dograh voice synthesis and low-latency LLM reasoning.
           </p>
         </div>
         <Link to="/agents/create">
@@ -47,12 +48,12 @@ export default function AgentsPage() {
       {/* Filter and Search Bar */}
       <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
         <div className="relative w-full sm:w-72">
-          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-500" />
+          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-400" />
           <Input
             placeholder="Search agents by name or role..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 h-9 text-xs bg-[#111215] border-zinc-800 rounded-xl text-zinc-200 placeholder:text-zinc-500"
+            className="pl-9 h-9 text-xs bg-[#111215] border-zinc-800 rounded-xl text-zinc-200 placeholder:text-zinc-400"
           />
         </div>
 
@@ -95,29 +96,29 @@ export default function AgentsPage() {
         <EmptyState
           icon={Bot}
           title="No voice agents found"
-          description="Create your first voice agent with an ElevenLabs voice and system instructions."
+          description="Create your first voice agent with a Dograh voice and system instructions."
           actionLabel="Create Voice Agent"
-          onAction={() => {}}
+          onAction={() => navigate('/agents/create')}
         />
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {filteredAgents.map((agent) => (
             <Card
               key={agent.id}
-              className="bg-[#111215] border-zinc-800/80 hover:border-zinc-700/80 transition-all rounded-2xl flex flex-col justify-between group glow-card"
+              className="card-interactive bg-[#111215] border-zinc-800/80 hover:border-zinc-700/80 rounded-2xl flex flex-col justify-between group"
             >
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-2.5">
-                    {/* ElevenLabs-style Sound Avatar */}
-                    <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
+                    {/* Agent sound avatar */}
+                    <div className="h-10 w-10 rounded-xl bg-brand/15 border border-brand/30 flex items-center justify-center text-brand group-hover:bg-brand/25 transition-colors">
                       <Mic className="h-5 w-5" />
                     </div>
                     <div>
-                      <CardTitle className="text-sm font-semibold text-white group-hover:text-indigo-400 transition-colors">
+                      <CardTitle className="text-sm font-semibold text-white group-hover:text-brand transition-colors">
                         {agent.name}
                       </CardTitle>
-                      <div className="text-[11px] text-zinc-500 font-mono mt-0.5">
+                      <div className="text-xs text-zinc-400 font-mono mt-0.5">
                         ID: {agent.id}
                       </div>
                     </div>
@@ -134,21 +135,21 @@ export default function AgentsPage() {
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   <Badge
                     variant="outline"
-                    className="text-[10px] font-normal border-zinc-800 bg-zinc-900/80 text-zinc-300 gap-1 rounded-md py-0.5"
+                    className="text-xs font-normal border-zinc-800 bg-zinc-900/80 text-zinc-300 gap-1 rounded-md py-0.5"
                   >
-                    <Volume2 className="h-2.5 w-2.5 text-indigo-400" />
-                    ElevenLabs Turbo
+                    <Volume2 className="h-2.5 w-2.5 text-brand" />
+                    Dograh Turbo
                   </Badge>
                   <Badge
                     variant="outline"
-                    className="text-[10px] font-normal border-zinc-800 bg-zinc-900/80 text-zinc-300 gap-1 rounded-md py-0.5"
+                    className="text-xs font-normal border-zinc-800 bg-zinc-900/80 text-zinc-300 gap-1 rounded-md py-0.5"
                   >
-                    <Cpu className="h-2.5 w-2.5 text-purple-400" />
+                    <Cpu className="h-2.5 w-2.5 text-brand" />
                     GPT-4o Mini
                   </Badge>
                   <Badge
                     variant="outline"
-                    className="text-[10px] font-normal border-zinc-800 bg-zinc-900/80 text-zinc-300 gap-1 rounded-md py-0.5"
+                    className="text-xs font-normal border-zinc-800 bg-zinc-900/80 text-zinc-300 gap-1 rounded-md py-0.5"
                   >
                     <Radio className="h-2.5 w-2.5 text-emerald-400" />
                     WebRTC + SIP
@@ -156,7 +157,7 @@ export default function AgentsPage() {
                 </div>
               </CardContent>
 
-              <CardFooter className="pt-2 border-t border-zinc-800/60 flex items-center justify-between text-xs text-zinc-500">
+              <CardFooter className="pt-2 border-t border-zinc-800/60 flex items-center justify-between text-xs text-zinc-400">
                 <span>Updated recently</span>
                 <Link to={`/agents/${agent.id}`}>
                   <Button
