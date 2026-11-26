@@ -139,7 +139,11 @@ services:
 
   api:
     build:
-      context: .
+      # Context is the repo root, relative to THIS compose file (deploy/coolify/).
+      # Coolify sets base directory to the repo root and reads this file from
+      # deploy/coolify/, so ../.. resolves to the checkout root where api/ and
+      # pipecat/ live.
+      context: ../..
       dockerfile: api/Dockerfile
     image: dograh-api:latest
     restart: unless-stopped
