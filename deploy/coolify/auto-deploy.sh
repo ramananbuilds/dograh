@@ -54,16 +54,29 @@ fi
 # provider does not discover these containers, so the file-provider route has
 # to be rewritten with the current IPs or ingress breaks after a deploy.
 write_route() {
-  local api_ip minio_ip host
+  local api_ip minio_ip ui_ip host
   host=$(grep -E '^PUBLIC_HOST=' "$ENV_FILE" | cut -d= -f2-)
   api_ip=$(sudo docker inspect dograh-api-1 \
     --format '{{range $k,$v := .NetworkSettings.Networks}}{{if eq $k "coolify"}}{{$v.IPAddress}}{{end}}{{end}}')
   minio_ip=$(sudo docker inspect minio \
     --format '{{range $k,$v := .NetworkSettings.Networks}}{{if eq $k "coolify"}}{{$v.IPAddress}}{{end}}{{end}}')
+  ui_ip=$(sudo docker inspect dograh-ui-1 \
+    --format '{{range $k,$v := .NetworkSettings.Networks}}{{if eq $k "coolify"}}{{$v.IPAddress}}{{end}}{{end}}' 2>/dev/null)
 
   if [ -z "$api_ip" ] || [ -z "$minio_ip" ]; then
     echo "$(date -Is) route NOT written: container missing from coolify network" >> "$LOG_FILE"
     return 1
+  fi
+
+  # The UI is optional; without it the catch-all router is omitted and / falls
+  # through to Coolify's 503 page.
+  local ui_block=""
+  if [ -n "$ui_ip" ]; then
+    ui_block="    dograh-ui:
+      rule: \"Host(\`$host\`)\"
+      entryPoints: [http]
+      service: dograh-ui-svc
+      priority: 1"
   fi
 
   sudo tee /data/coolify/proxy/dynamic/dograh.yml >/dev/null <<EOF
@@ -79,6 +92,7 @@ http:
       entryPoints: [http]
       service: dograh-audio-svc
       priority: 20
+$ui_block
   services:
     dograh-api-svc:
       loadBalancer:
@@ -88,8 +102,15 @@ http:
       loadBalancer:
         servers:
           - url: "http://$minio_ip:9000"
+$(if [ -n "$ui_ip" ]; then cat <<SUF
+    dograh-ui-svc:
+      loadBalancer:
+        servers:
+          - url: "http://$ui_ip:3010"
+SUF
+fi)
 EOF
-  echo "$(date -Is) route written: api=$api_ip minio=$minio_ip host=$host" >> "$LOG_FILE"
+  echo "$(date -Is) route written: api=$api_ip minio=$minio_ip ui=${ui_ip:-none} host=$host" >> "$LOG_FILE"
 }
 
 write_route
