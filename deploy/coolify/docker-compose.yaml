@@ -101,6 +101,8 @@ services:
       - "traefik.http.services.dograh-audio.loadbalancer.server.port=9000"
     networks:
       - app-network
+      # Reachable by Coolify's Traefik proxy for /voice-audio downloads.
+      - traefik
 
   # TURN/STUN relay for WebRTC NAT traversal. This is the voice media path —
   # it is UDP and is NOT, and cannot be, proxied by Traefik. These host ports
@@ -225,6 +227,9 @@ services:
       - "traefik.http.services.dograh-api.loadbalancer.server.port=8000"
     networks:
       - app-network
+      # Coolify's Traefik proxy is attached to this network; the labels above
+      # only take effect if the container is reachable on it.
+      - traefik
 
 volumes:
   postgres_data:
